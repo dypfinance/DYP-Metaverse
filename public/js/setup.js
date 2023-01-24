@@ -27486,6 +27486,10 @@ async function connectWallet() {
       if (window.ethereum.isMetaMask) {
         window.WALLET_TYPE = "metamask";
       }
+      if(window.ethereum.isAurox)
+      {
+        window.WALLET_TYPE = "aurox";
+      }
       let coinbase_address = await window.ethereum?.request({
         method: "eth_accounts",
       });
@@ -27516,8 +27520,10 @@ window.param = param;
 window.cached_contracts = Object.create(null);
 
 function getCoinbase() {
-  if (window.WALLET_TYPE == "coin98") {
+  if (window.WALLET_TYPE == "coin98") 
     return window.coinbase_address.toLowerCase();
+  if (window.WALLET_TYPE == "aurox") {
+    return window.coinbase_address;
   } else {
     return window.web3.eth?.getCoinbase();
   }

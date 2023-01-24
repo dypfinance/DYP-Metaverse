@@ -251,6 +251,7 @@ const Land = ({
 
     const interval = setInterval(async () => {
       if (isConnected && coinbase) {
+        console.log(coinbase);
         handleClaimAll().then();
         myStakes();
         myNft()
