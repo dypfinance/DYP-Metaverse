@@ -31,12 +31,13 @@ const TimePieceTraits = () => {
             We love all of our cats, but some of their watches make them stand
             out a bit more than others. We'll let you be the judge of that.
           </p>
-          <div className="d-flex justify-content-end">
+          <div className="d-flex justify-content-center justify-content-xxl-end justify-content-lg-end justify-content-md-end">
             <a
               href="https://rarity.tools"
               target="_blank"
               className="timepiece-border"
               style={{textDecoration: 'none'}}
+              rel='noreferrer'
             >
               <button className="btn timepiece-btn px-5 d-flex align-items-center">
                 <img src={raritytools} alt='' className="mx-2"/>

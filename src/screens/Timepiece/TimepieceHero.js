@@ -3,7 +3,7 @@ import timepieceBanner from "./assets/timePieceBanner.webp";
 
 const TimepieceHero = () => {
   return (
-    <div className="full-screen-main-hero d-flex align-items-center">
+    <div className="full-screen-main-hero2 d-flex align-items-center">
         <div className="container-fluid px-3 px-lg-5 position-relative">
           <div className="row justify-content-center pb-5">
             <div className="col-12 col-lg-8  d-flex flex-column align-items-center">

@@ -54,7 +54,6 @@ const TimepieceChecklistModal = ({
               className="rarity-rank mt-6"
               style={{
                 position: "relative",
-                marginBottom: window.innerWidth < 500 ? "4rem" : "3rem",
                 top: "1rem",
               }}
             >
@@ -72,8 +71,8 @@ const TimepieceChecklistModal = ({
               style={{
                 right: "-12px",
                 top: "-10px",
-                height: "fit-content",
                 width: 50,
+                height: 50,
                 cursor: "pointer",
               }}
             />

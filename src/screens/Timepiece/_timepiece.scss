@@ -5,7 +5,7 @@
   width: 100%;
 }
 
-.full-screen-main-hero {
+.full-screen-main-hero2 {
   position: relative;
   height: 76vh;
   .timepiece-title {
@@ -25,7 +25,7 @@
   }
 }
 
-.full-screen-main-hero::before {
+.full-screen-main-hero2::before {
   content: "";
   background-image: url("./assets/timePieceBanner.webp");
   background-size: cover;
