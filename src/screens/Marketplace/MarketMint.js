@@ -354,6 +354,7 @@ const MarketMint = ({
                               src={confluxActive}
                               className="w-100 h-100"
                               alt=""
+                              style={{borderRadius: "0 0 28px 28px"}}
                             />
                           </div>
                         </div>
@@ -372,6 +373,8 @@ const MarketMint = ({
                             src={coin98Active}
                             className="w-100 h-100"
                             alt=""
+                            style={{borderRadius: "0 0 28px 28px"}}
+
                           />
                         </div>
                       </div>
@@ -390,6 +393,8 @@ const MarketMint = ({
                             src={coingeckoActive}
                             className="w-100 h-100"
                             alt=""
+                            style={{borderRadius: "0 0 28px 28px"}}
+
                           />
                         </div>
                       </div>
@@ -406,6 +411,8 @@ const MarketMint = ({
                             src={baseActive}
                             className="w-100 h-100"
                             alt=""
+                            style={{borderRadius: "0 0 28px 28px"}}
+
                           />
                         </div>
                       </div>
@@ -424,6 +431,8 @@ const MarketMint = ({
                             src={timepieceActive}
                             className="w-100 h-100"
                             alt=""
+                            style={{borderRadius: "0 0 28px 28px"}}
+
                           />
                         </div>
                       </div>
@@ -555,7 +564,7 @@ const MarketMint = ({
                               className="land-placeholder mb-0"
                               style={{ marginLeft: 11 }}
                             >
-                              {nftName === "" ? "" : `Caws Timepiece`}
+                              {nftName === "" ? "" : selectedMint.title}
                             </h6>
                           </div>
                         </div>

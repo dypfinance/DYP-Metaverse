@@ -26,6 +26,11 @@ import dropdownIcon from "./assets/dropdownIcon.svg";
 import Pagination from "@mui/material/Pagination";
 import { Skeleton } from "@mui/material";
 
+
+import ActiveProfileEvent from "./ActiveProfileEvent";
+import UpcomingProfileEvent from "./UpcomingProfileEvent";
+import ExpiredProfileEvent from "./ExpiredProfileEvent";
+
 const WalletBalance = ({
   dypBalance,
   address,
@@ -812,9 +817,9 @@ const WalletBalance = ({
     <div className="main-wrapper py-4 w-100 d-flex flex-column gap-4 mt-5 mt-xxl-0 mt-lg-0 justify-content-center align-items-center">
       <div className="row w-100 gap-5 gap-lg-0">
         <div className="col-12 rankings-outer-wrapper px-0 px-lg-3 col-lg-5">
-          <div className="nft-outer-wrapper rankings-wrapper p-4  d-flex flex-column gap-2 position-relative custom-height-2">
-            <h5 className="bal-txt px-4">My Rankings</h5>
-            <div className={`d-flex gap-3 justify-content-evenly `}>
+          <div className="nft-outer-wrapper rankings-wrapper p-4  d-flex flex-column justify-content-center gap-2 position-relative custom-height-2">
+            {/* <h5 className="bal-txt px-4">My Rankings</h5> */}
+            {/* <div className={`d-flex gap-3 justify-content-evenly `}>
               <div className="d-flex flex-column gap-2 align-items-center justify-content-between">
                 <img src={globalRank} alt="" />
                 <span className="globaltext" style={{ fontSize: 12 }}>
@@ -842,6 +847,27 @@ const WalletBalance = ({
                     : "N/A"}
                 </span>
                 <span className="genesistext">Genesis</span>
+              </div>
+            </div> */}
+            <div className="d-flex flex-column gap-4">
+             <ActiveProfileEvent />
+             <UpcomingProfileEvent />
+             <ExpiredProfileEvent />
+              <div className="w-100 d-flex justify-content-center">
+              <div
+                      className="d-flex align-items-center justify-content-center gap-2"
+                    
+                      style={{ cursor: "pointer", width: "fit-content" }}
+                    >
+                      <span className="account-view-all">
+                        View More
+                      </span>
+                      <img
+                        src={viewAllArrow}
+                        style={{rotate: "180deg"}}
+                        alt=""
+                      />
+                    </div>
               </div>
             </div>
           </div>
@@ -999,12 +1025,12 @@ const WalletBalance = ({
                       </div>
                     </NavLink>
                   ))}
-                {favoriteItems.length === 0 && coinbase  && (
+                {favoriteItems.length === 0 && coinbase && (
                   <span className="seller-addr" style={{ textAlign: "center" }}>
                     You do not have any favorite NFTs
                   </span>
                 )}
-                {favoriteItems.length === 0 && !coinbase  && (
+                {favoriteItems.length === 0 && !coinbase && (
                   <span className="seller-addr" style={{ textAlign: "center" }}>
                     Connect your wallet to view your favorite NFTs.
                   </span>
@@ -1099,7 +1125,7 @@ const WalletBalance = ({
                       </div>
                     </NavLink>
                   ))}
-                {myOffers.length === 0 && coinbase  && (
+                {myOffers.length === 0 && coinbase && (
                   <span className="seller-addr" style={{ textAlign: "center" }}>
                     You have not made any offers
                   </span>
@@ -1189,7 +1215,7 @@ const WalletBalance = ({
                   </span>
                 )}
 
-{collectedItems.length === 0 && !coinbase  && (
+                {collectedItems.length === 0 && !coinbase && (
                   <span className="seller-addr" style={{ textAlign: "center" }}>
                     Connect your wallet to view your NFTs.
                   </span>
@@ -1313,12 +1339,17 @@ const WalletBalance = ({
                       </div>
                     </NavLink>
                   ))}
-                {myCawsWodStakes.length === 0 && coinbase && landStaked.length === 0 && (
-                  <span className="seller-addr" style={{ textAlign: "center" }}>
-                    You do not have any NFTs in stake
-                  </span>
-                )}
-                {myCawsWodStakes.length === 0 && !coinbase   && (
+                {myCawsWodStakes.length === 0 &&
+                  coinbase &&
+                  landStaked.length === 0 && (
+                    <span
+                      className="seller-addr"
+                      style={{ textAlign: "center" }}
+                    >
+                      You do not have any NFTs in stake
+                    </span>
+                  )}
+                {myCawsWodStakes.length === 0 && !coinbase && (
                   <span className="seller-addr" style={{ textAlign: "center" }}>
                     Connect your wallet to view your staked NFTs.
                   </span>
@@ -1422,12 +1453,12 @@ const WalletBalance = ({
                       </div>
                     </NavLink>
                   ))}
-                {listedItems.length === 0 && coinbase  && (
+                {listedItems.length === 0 && coinbase && (
                   <span className="seller-addr" style={{ textAlign: "center" }}>
                     You do not have any listed NFTs
                   </span>
                 )}
-                 {listedItems.length === 0 && !coinbase  && (
+                {listedItems.length === 0 && !coinbase && (
                   <span className="seller-addr" style={{ textAlign: "center" }}>
                     Connect your wallet to view your listed NFTs.
                   </span>
