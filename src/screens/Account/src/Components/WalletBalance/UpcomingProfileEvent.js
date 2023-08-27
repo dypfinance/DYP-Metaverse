@@ -9,9 +9,9 @@ import purpleExplore from "./assets/purpleExplore.svg";
 import purpleFind from "./assets/purpleFind.svg";
 import confluxProfileBanner from "./assets/confluxProfileBanner.png";
 
-const UpcomingProfileEvent = () => {
+const UpcomingProfileEvent = ({onOpenEvent}) => {
   return (
-    <div className="profile-event-item d-flex flex-column position-relative" style={{background: "rgba(140, 86, 255, 0.10)", backdropFilter: "blur(10px)", borderBottom: "1px solid #8C56FF"}}>
+    <div className="profile-event-item d-flex flex-column position-relative" onClick={onOpenEvent} style={{background: "rgba(140, 86, 255, 0.10)", backdropFilter: "blur(10px)", borderBottom: "1px solid #8C56FF"}}>
     <div className="profile-event-tag d-flex align-items-center justify-content-center px-1" style={{background: "#8C56FF"}}> 
     <span className="profile-event-tag-text mb-0" style={{color: "#FFFFFF"}}>Comming Soon</span>
     </div>

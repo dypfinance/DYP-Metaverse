@@ -198,6 +198,33 @@
   background-position: center;
 }
 
+
+.portfolio-image{
+  width: 50%;
+  transition: all .25s;
+}
+
+.portfolio-btn{
+  border-radius: 20px;
+  background: linear-gradient(90deg, #830E47 0%, #5065C3 100%);
+  color: #FFF !important;
+text-align: center;
+font-size: 16px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;
+}
+
+
+.my-portfolio-btn{
+  width: 33%;
+}
+.my-portfolio-btn:hover{
+  .portfolio-image{
+    transform: translateY(-10px) !important;
+  }
+}
+
 .failbtn {
   border-radius: 20px;
   background: linear-gradient(90deg, #ffac45 0%, #ff6232 100%);

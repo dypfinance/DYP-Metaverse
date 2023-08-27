@@ -15,6 +15,9 @@ import logouticon from "./assets/logout.svg";
 import player from "./assets/explorePlayer.png";
 import triangle from "./assets/triangle.svg";
 import sync from "./assets/sync.svg";
+import globalRank from "../WalletBalance/assets/globalRank.svg";
+import genesisImg from "../WalletBalance/assets/genesisRank.svg";
+import multiCaws from "../../../../Caws/assets/images/multi-caws.png";
 
 // const renderer = ({ hours, minutes, seconds }) => {
 //   return (
@@ -246,16 +249,12 @@ const ProfileCard = ({
                   <button
                     className="d-flex align-self-end px-3 py-1 align-items-center pill-btn"
                     onClick={() => {
-                      !coinbase
-                        ? handleShowWalletPopup()
-                        : onSigninClick();
+                      !coinbase ? handleShowWalletPopup() : onSigninClick();
                     }}
                     role="button"
                     style={{ width: "fit-content", fontSize: 14 }}
                   >
-                    {!coinbase
-                      ? "Connect wallet"
-                      : "Sign in "}{" "}
+                    {!coinbase ? "Connect wallet" : "Sign in "}{" "}
                     <img src={greenarrow} alt="" />
                   </button>
                 ) : (
@@ -377,8 +376,8 @@ const ProfileCard = ({
           </div>
           <img src={dypMedal} alt="" className="position-absolute dypMedal" />
         </div>
-        <div className="explorebanner col-12 col-lg-7 col-xxl-7 position-relative">
-          <div className="d-flex flex-column gap-2 justify-content-center h-100">
+        <div className="explorebanner col-12 col-lg-7 col-xxl-7 d-flex align-items-center justify-content-around position-relative">
+          {/* <div className="d-flex flex-column gap-2 justify-content-center h-100">
             <div className="orangesection">
               <span>World of Dypians</span>
             </div>
@@ -402,7 +401,42 @@ const ProfileCard = ({
                   ? "450px"
                   : "",
             }}
-          />
+          /> */}
+          {/* <h5 className="bal-txt px-4">My Rankings</h5> */}
+          <div className="d-flex flex-column gap-2 align-items-center justify-content-between">
+            <img src={globalRank} alt="" />
+            <span className="globaltext" style={{ fontSize: 12 }}>
+              #
+              {/* {isVerified &&
+                  email &&
+                  address &&
+                  coinbase &&
+                  address.toLowerCase() === coinbase.toLowerCase()
+                    ? userRank + 1
+                    : "N/A"} */}
+              1
+            </span>
+            <span className="globaltext">Global</span>
+          </div>
+          <div className="d-flex flex-column gap-2 align-items-center justify-content-between">
+            <img src={genesisImg} alt="" className="genesisimg" />
+            <span className="genesistext" style={{ fontSize: 12 }}>
+              {/* #
+                  {isVerified &&
+                  email &&
+                  address &&
+                  coinbase &&
+                  address.toLowerCase() === coinbase.toLowerCase()
+                    ? genesisRank + 1
+                    : "N/A"} */}
+              1
+            </span>
+            <span className="genesistext">Genesis</span>
+          </div>
+          <div className="my-portfolio-btn d-flex flex-column align-items-center gap-2 p-3">
+            <img src={multiCaws} className="portfolio-image" alt="" />
+            <button className="btn portfolio-btn">My Portfolio</button>
+          </div>
         </div>
       </div>
     </div>

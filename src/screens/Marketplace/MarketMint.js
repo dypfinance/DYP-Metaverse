@@ -25,6 +25,7 @@ import coingeckoActive from "./assets/coingeckoActive.png";
 import baseActive from "./assets/baseActive.png";
 import timepieceActive from "./assets/timepieceActive.png";
 import Slider from "react-slick";
+import { useLocation } from "react-router-dom";
 
 const MarketMint = ({
   showWalletConnect,
@@ -43,6 +44,9 @@ const MarketMint = ({
   timepieceMetadata,
 }) => {
   const windowSize = useWindowSize();
+  const location = useLocation();
+
+  const locationState = location.state.event
   const [viewCollection, setViewCollection] = useState(false);
   const [nftCount, setNftCount] = useState(1);
   const [nftStatus, setNftStatus] = useState("*50 NFT limit");
@@ -265,6 +269,22 @@ const MarketMint = ({
     window.scrollTo(0, 0);
     document.title = "Timepiece Mint";
   }, []);
+
+  useEffect(() => {
+      if(locationState === "conflux"){
+        setSelectedMint(confluxData); setMintTitle("conflux")
+      }else if(locationState === "coingecko"){
+        setSelectedMint(coingeckoData); setMintTitle("coingecko")
+      
+      }else if(locationState === "coin98"){
+        setSelectedMint(coin98Data); setMintTitle("coin98")
+      
+      }else if(locationState === "base"){
+        setSelectedMint(baseData); setMintTitle("base")
+      }
+  }, [])
+  
+
 
   return (
     <>

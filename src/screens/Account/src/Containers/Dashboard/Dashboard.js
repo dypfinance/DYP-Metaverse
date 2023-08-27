@@ -699,6 +699,8 @@ function Dashboard({
                         onLogoutClick={logout}
                         onSyncClick={handleShowSyncModal}
                         syncStatus={syncStatus}
+
+
                       />
                       <WalletBalance
                         ethTokenData={ethTokenData}
