@@ -26,6 +26,8 @@ import baseActive from "./assets/baseActive.png";
 import timepieceActive from "./assets/timepieceActive.png";
 import Slider from "react-slick";
 import { useLocation } from "react-router-dom";
+import nextArrow from "./assets/nextArrow1.svg";
+
 
 const MarketMint = ({
   showWalletConnect,
@@ -46,7 +48,7 @@ const MarketMint = ({
   const windowSize = useWindowSize();
   const location = useLocation();
 
-  const locationState = location.state.event
+  const locationState = location?.state?.event
   const [viewCollection, setViewCollection] = useState(false);
   const [nftCount, setNftCount] = useState(1);
   const [nftStatus, setNftStatus] = useState("*50 NFT limit");
@@ -63,6 +65,11 @@ const MarketMint = ({
   const [overflowing, setOverflowing] = useState(false);
   const [shadows, setShadows] = useState(false);
   const slider = useRef(null);
+
+  const [sliderCut, setSliderCut] = useState();
+  const [activeSlide, setActiveSlide] = useState(0);
+  const [showFirstNext, setShowFirstNext] = useState(false);
+
 
 
   const confluxData = {
@@ -105,6 +112,23 @@ const MarketMint = ({
   
 
 
+
+  const cutLength = () => {
+    if (windowSize.width > 1600) {
+      setSliderCut(5);
+    } else if (windowSize.width > 1500) {
+      setSliderCut(5);
+    } else if (windowSize.width > 1400) {
+      setSliderCut(4);
+    } else if (windowSize.width > 1050) {
+      setSliderCut(3);
+    } else if (windowSize.width > 480) {
+      setSliderCut(2);
+    } else {
+      setSliderCut(1);
+    }
+  }
+
   var settings = {
     dots: false,
     arrows: false,
@@ -114,6 +138,11 @@ const MarketMint = ({
     slidesToShow: 5,
     slidesToScroll: 1,
     initialSlide: 0,
+    beforeChange: (current, next) => {
+      setActiveSlide(next);
+      setShowFirstNext(current);
+    },
+    afterChange: (current) => setActiveSlide(current),
     responsive: [
       {
         breakpoint: 1600,
@@ -156,6 +185,13 @@ const MarketMint = ({
         },
       },
     ],
+  };
+
+  const firstNext = () => {
+    slider.current.slickNext();
+  };
+ const firstPrev = () => {
+    slider.current.slickPrev();
   };
 
   const handleViewCollection = () => {
@@ -268,6 +304,7 @@ const MarketMint = ({
   useEffect(() => {
     window.scrollTo(0, 0);
     document.title = "Timepiece Mint";
+    cutLength();
   }, []);
 
   useEffect(() => {
@@ -357,7 +394,19 @@ const MarketMint = ({
 
               {activeTab === "live" && (
                 <>
-                  <div className="pb-5 px-0">
+                  <div className="pb-5 px-0 position-relative">
+                  {activeSlide > 0 && (
+                <div className="prev-arrow-nft" onClick={firstPrev}>
+                  <img src={nextArrow} alt="" />
+                </div>
+              )}
+              {showFirstNext === activeSlide
+                ? null
+                : 5 > sliderCut && (
+                    <div className="next-arrow-nft" onClick={firstNext}>
+                      <img src={nextArrow} alt="1" />
+                    </div>
+                  )}
                     <Slider ref={(c) => (slider.current = c)} {...settings}>
                         <div className={` ${mintTitle === "conflux" && "active-mint-selected"}  active-mint mint-1 justify-content-between d-flex flex-column`} onClick={() => {setSelectedMint(confluxData); setMintTitle("conflux")}}>
                           <div className="first-half h-50 p-3 d-flex flex-column justify-content-center gap-2">

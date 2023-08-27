@@ -699,7 +699,29 @@ function Dashboard({
                         onLogoutClick={logout}
                         onSyncClick={handleShowSyncModal}
                         syncStatus={syncStatus}
-
+                        ethTokenData={ethTokenData}
+                        dypTokenData={dypTokenData}
+                        onOpenNfts={onOpenNfts}
+                        listedNFTS={listedNFTS}
+                        myBoughtNfts={myBoughtNfts}
+                        favoritesArray={favorites}
+                        dypBalance={dypBalance}
+                        dypBalancebnb={dypBalancebnb}
+                        dypBalanceavax={dypBalanceavax}
+                        idypBalance={idypBalance}
+                        idypBalancebnb={idypBalancebnb}
+                        idypBalanceavax={idypBalanceavax}
+                        showNfts={showNfts}
+                        myCawsCollected={MyNFTSCaws}
+                        myCawsOldCollected={MyNFTSCawsOld}
+                        myLandCollected={MyNFTSLand}
+                        myTimepieceCollected={MyNFTSTimepiece}
+                        landStaked={landstakes}
+                        myCawsWodStakes={myCawsWodStakesAll}
+                        myWodWodStakes={myWodWodStakesAll}
+                        latestBoughtNFTS={latest20BoughtNFTS}
+                        myOffers={myOffers}
+                        allActiveOffers={allActiveOffers}
 
                       />
                       <WalletBalance

@@ -256,6 +256,7 @@ const MarketEvents = ({
     }
   }, [popup]);
 
+
  
   return (
     <>
