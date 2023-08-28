@@ -928,7 +928,7 @@ const WalletBalance = ({
               </div>
             </div>
           </div>
-          <h6 className="profile-wrapper-title mb-2">My Portfolio</h6>
+          {/* <h6 className="profile-wrapper-title mb-2">My Portfolio</h6>
 
           <div className="col-12 px-0 px-lg-3 col-lg-12">
             <div className=" nft-outer-wrapper p-4  d-flex flex-column gap-2 position-relative custom-height-2">
@@ -1071,16 +1071,7 @@ const WalletBalance = ({
                                   : "CAWS Timepiece"}{" "}
                                 #{item.tokenId}
                               </h6>
-                              {/* <span className="account-nft-type">
-                              {item.nftAddress ===
-                                window.config.nft_cawsold_address ||
-                              item.nftAddress === window.config.nft_caws_address
-                                ? "CAWS"
-                                : item.nftAddress ===
-                                  window.config.nft_land_address
-                                ? "Genesis Land"
-                                : "Timepiece"}
-                            </span> */}
+                      
                             </div>
                           </div>
                         </div>
@@ -1103,41 +1094,6 @@ const WalletBalance = ({
                     </span>
                   )}
 
-                  {/* {favoriteItems.length < 6 &&
-                  emptyArray
-                    .slice(0, 6 - favoriteItems.length)
-                    .map((item, index) => (
-                      <NavLink
-                        key={index}
-                        to={`/marketplace`}
-                        style={{ textDecoration: "none" }}
-                        className="col-12 col-lg-6 col-xxl-4 mb-3"
-                      >
-                        <div className="">
-                          <div className="account-nft-card w-100 d-flex align-items-center gap-3">
-                            <img
-                              src={
-                                index % 2 !== 0
-                                  ? accountEmptyCaws
-                                  : accountEmptyLand
-                              }
-                              alt=""
-                              className="account-card-img"
-                            />
-                            <div className="d-flex flex-column align-items-start justify-content-center">
-                              <span
-                                className="account-nft-type"
-                                style={{ width: "80%" }}
-                              >
-                                {index % 2 !== 0
-                                  ? "Get your CAWS NFT from the WoD Game Shop"
-                                  : "Get your World of Dypians Land NFT from the WoD Game Shop"}
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                      </NavLink>
-                    ))} */}
                 </div>
               )}
 
@@ -1271,13 +1227,7 @@ const WalletBalance = ({
                                   : "Timepiece"}{" "}
                                 #{item.tokenId}
                               </h6>
-                              {/* <span className="account-nft-type">
-                              {item.type === "caws"
-                                ? "CAWS"
-                                : item.type === "land"
-                                ? "Land"
-                                : "CAWS Timepiece"}
-                            </span> */}
+                        
                             </div>
                           </div>
                         </div>
@@ -1300,42 +1250,6 @@ const WalletBalance = ({
                       Connect your wallet to view your NFTs.
                     </span>
                   )}
-
-                  {/* {collectedItems.length < 6 &&
-                  emptyArray
-                    .slice(0, 6 - collectedItems.length)
-                    .map((item, index) => (
-                      <NavLink
-                        key={index}
-                        to={`/marketplace`}
-                        style={{ textDecoration: "none" }}
-                        className="col-12 col-lg-6 col-xxl-4 mb-3"
-                      >
-                        <div className="">
-                          <div className="account-nft-card w-100 d-flex align-items-center gap-3">
-                            <img
-                              src={
-                                index % 2 !== 0
-                                  ? accountEmptyCaws
-                                  : accountEmptyLand
-                              }
-                              alt=""
-                              className="account-card-img"
-                            />
-                            <div className="d-flex flex-column align-items-start justify-content-center">
-                              <span
-                                className="account-nft-type"
-                                style={{ width: "80%" }}
-                              >
-                                {index % 2 !== 0
-                                  ? "Get your CAWS NFT from the WoD Game Shop"
-                                  : "Get your World of Dypians Land NFT from the WoD Game Shop"}
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                      </NavLink>
-                    ))} */}
                 </div>
               )}
 
@@ -1372,7 +1286,6 @@ const WalletBalance = ({
                               <h6 className="account-nft-title">
                                 {"Genesis"} {item.name}
                               </h6>
-                              {/* <span className="account-nft-type">{"Land"}</span> */}
                             </div>
                           </div>
                         </div>
@@ -1437,44 +1350,6 @@ const WalletBalance = ({
                       Connect your wallet to view your staked NFTs.
                     </span>
                   )}
-
-                  {/* {myCawsWodStakes.length + landStaked.length < 6 &&
-                  emptyArray
-                    .slice(0, 4 - myCawsWodStakes.length + landStaked.length)
-                    .map((item, index) => (
-                      <NavLink
-                        key={index}
-                        to={`/marketplace`}
-                        style={{ textDecoration: "none" }}
-                        className="col-12 col-lg-6 col-xxl-6 mb-3"
-                      >
-                        <div className="">
-                          <div className="account-nft-card w-100 d-flex align-items-center gap-3">
-                            <div className="d-flex align-items-center">
-                              <img
-                                src={accountEmptyLand}
-                                alt=""
-                                className="account-card-img"
-                              />
-                              <img
-                                src={accountEmptyCaws}
-                                alt=""
-                                className="account-card-img"
-                              />
-                            </div>
-                            <div className="d-flex flex-column align-items-start justify-content-center">
-                              <span
-                                className="account-nft-type"
-                                style={{ width: "80%" }}
-                              >
-                                Get your CAWS NFT & Land NFT from the WoD Game
-                                Shop
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                      </NavLink>
-                    ))} */}
                 </div>
               )}
 
@@ -1525,13 +1400,6 @@ const WalletBalance = ({
                                   : "CAWS Timepiece"}{" "}
                                 #{item.tokenId}
                               </h6>
-                              {/* <span className="account-nft-type">
-                              {item.type === "caws"
-                                ? "CAWS"
-                                : item.type === "land"
-                                ? "Genesis Land"
-                                : "Timepiece"}
-                            </span> */}
                             </div>
                           </div>
                         </div>
@@ -1553,41 +1421,6 @@ const WalletBalance = ({
                       Connect your wallet to view your listed NFTs.
                     </span>
                   )}
-                  {/* {listedItems.length < 6 &&
-                  emptyArray
-                    .slice(0, 6 - listedItems.length)
-                    .map((item, index) => (
-                      <NavLink
-                        key={index}
-                        to={`/marketplace`}
-                        style={{ textDecoration: "none" }}
-                        className="col-12 col-lg-6 col-xxl-4 mb-3"
-                      >
-                        <div className="">
-                          <div className="account-nft-card w-100 d-flex align-items-center gap-3">
-                            <img
-                              src={
-                                index % 2 !== 0
-                                  ? accountEmptyCaws
-                                  : accountEmptyLand
-                              }
-                              alt=""
-                              className="account-card-img"
-                            />
-                            <div className="d-flex flex-column align-items-start justify-content-center">
-                              <span
-                                className="account-nft-type"
-                                style={{ width: "80%" }}
-                              >
-                                {index % 2 !== 0
-                                  ? "Get your CAWS NFT from the WoD Game Shop"
-                                  : "Get your World of Dypians Land NFT from the WoD Game Shop"}
-                              </span>
-                            </div>
-                          </div>
-                        </div>
-                      </NavLink>
-                    ))} */}
                 </div>
               )}
 
@@ -1836,15 +1669,6 @@ const WalletBalance = ({
                 )}
 
               {loading === true && (
-                // <div className="loader-wrapper">
-                //   <HashLoader
-                //     color={"#554fd8"}
-                //     loading={loading}
-                //     cssOverride={override}
-                //     aria-label="Loading Spinner"
-                //     data-testid="loader"
-                //   />
-                // </div>
                 <div className="row justify-content-center px-3">
                   <div className="col-12 col-lg-6 col-xxl-4 mb-3">
                     <Skeleton
@@ -1897,7 +1721,7 @@ const WalletBalance = ({
                 </div>
               )}
             </div>
-          </div>
+          </div> */}
         </div>
         {showNfts && (
           <div
@@ -2167,18 +1991,6 @@ const WalletBalance = ({
                                   window.config.nft_land_address
                                 ? "land"
                                 : "timepiece",
-                            // isOwner:
-                            //   isVerified && email
-                            //     ? nft.buyer
-                            //       ? nft.buyer?.toLowerCase() ===
-                            //         address?.toLowerCase()
-                            //         ? nft.buyer?.toLowerCase() ===
-                            //           coinbase?.toLowerCase()
-                            //         : nft.seller?.toLowerCase() ===
-                            //           address?.toLowerCase()
-                            //       : nft.seller?.toLowerCase() ===
-                            //         coinbase?.toLowerCase()
-                            //     : false,
                             isOwner:
                               (nft.buyer &&
                                 nft.buyer.toLowerCase() ===
@@ -2219,16 +2031,6 @@ const WalletBalance = ({
                                     : "CAWS Timepiece"}{" "}
                                   #{nft.tokenId}
                                 </h6>
-                                {/* <span className="account-nft-type">
-                            {nft.nftAddress ===
-                              window.config.nft_cawsold_address ||
-                            nft.nftAddress === window.config.nft_caws_address
-                              ? "CAWS"
-                              : nft.nftAddress ===
-                                window.config.nft_land_address
-                              ? "Genesis Land"
-                              : "Timepiece"}
-                          </span> */}
                               </div>
                             </div>
                           </div>
@@ -2340,18 +2142,7 @@ const WalletBalance = ({
                                   window.config.nft_land_address
                                 ? "land"
                                 : "timepiece",
-                            // isOwner:
-                            //   isVerified && email
-                            //     ? nft.buyer
-                            //       ? nft.buyer?.toLowerCase() ===
-                            //         address?.toLowerCase()
-                            //         ? nft.buyer?.toLowerCase() ===
-                            //           coinbase?.toLowerCase()
-                            //         : nft.seller?.toLowerCase() ===
-                            //           address?.toLowerCase()
-                            //       : nft.seller?.toLowerCase() ===
-                            //         coinbase?.toLowerCase()
-                            //     : false,
+            
                             isOwner:
                               (nft.buyer &&
                                 nft.buyer.toLowerCase() ===
@@ -2396,16 +2187,7 @@ const WalletBalance = ({
                                     : "CAWS Timepiece"}{" "}
                                   #{nft.tokenId}
                                 </h6>
-                                {/* <span className="account-nft-type">
-                            {nft.nftAddress ===
-                              window.config.nft_cawsold_address ||
-                            nft.nftAddress === window.config.nft_caws_address
-                              ? "CAWS"
-                              : nft.nftAddress ===
-                                window.config.nft_land_address
-                              ? "Genesis Land"
-                              : "Caws Timepiece"}
-                          </span> */}
+                    
                               </div>
                             </div>
                           </div>
@@ -2449,18 +2231,7 @@ const WalletBalance = ({
                                   window.config.nft_land_address
                                 ? "land"
                                 : "timepiece",
-                            // isOwner:
-                            //   isVerified && email
-                            //     ? nft.buyer
-                            //       ? nft.buyer?.toLowerCase() ===
-                            //         address?.toLowerCase()
-                            //         ? nft.buyer?.toLowerCase() ===
-                            //           coinbase?.toLowerCase()
-                            //         : nft.seller?.toLowerCase() ===
-                            //           address?.toLowerCase()
-                            //       : nft.seller?.toLowerCase() ===
-                            //         coinbase?.toLowerCase()
-                            //     : false,
+                  
                             isOwner:
                               (nft.buyer &&
                                 nft.buyer.toLowerCase() ===
@@ -2505,16 +2276,7 @@ const WalletBalance = ({
                                     : "CAWS Timepiece"}{" "}
                                   #{nft.tokenId}
                                 </h6>
-                                {/* <span className="account-nft-type">
-                            {nft.nftAddress ===
-                              window.config.nft_cawsold_address ||
-                            nft.nftAddress === window.config.nft_caws_address
-                              ? "CAWS"
-                              : nft.nftAddress ===
-                                window.config.nft_land_address
-                              ? "Genesis Land"
-                              : "Timepiece"}
-                          </span> */}
+             
                               </div>
                             </div>
                           </div>
@@ -2574,12 +2336,7 @@ const WalletBalance = ({
                                 </div>
                               </div>
                             </div>
-                            {/* <CawsWodItem
-                        cawsImg={nft.image}
-                        wodImg={myWodWodStakes[index].image}
-                        cawsName={nft.name}
-                        wodName={myWodWodStakes[index].name}
-                      /> */}
+            
                           </NavLink>
                         ))
                     : recentListingsFilter === "land"
@@ -2605,9 +2362,7 @@ const WalletBalance = ({
                                 <h6 className="account-nft-title">
                                   Land {nft.name}
                                 </h6>
-                                {/* <span className="account-nft-type">
-                              Genesis Land
-                            </span> */}
+                   
                               </div>
                             </div>
                           </div>
@@ -2643,15 +2398,7 @@ const WalletBalance = ({
                 </div>
               </div>
             ) : (
-              // <div className="loader-wrapper">
-              //   <HashLoader
-              //     color={"#554fd8"}
-              //     loading={loadingRecentListings}
-              //     cssOverride={override}
-              //     aria-label="Loading Spinner"
-              //     data-testid="loader"
-              //   />
-              // </div>
+      
               <div className="row justify-content-center px-3">
                 <div className="col-12 col-lg-6 col-xxl-4 mb-3">
                   <Skeleton

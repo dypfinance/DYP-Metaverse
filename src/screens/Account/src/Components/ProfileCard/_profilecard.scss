@@ -279,6 +279,7 @@ line-height: normal;
   z-index: 9999;
   box-shadow: 0 0 0 10000px rgba(0, 0, 0, 0.5);
   pointer-events: auto;
+  min-height: 350px;
   @media screen and (max-width: 1600px) {
     width: 75%;
   }
