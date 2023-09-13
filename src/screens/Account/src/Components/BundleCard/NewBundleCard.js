@@ -1188,7 +1188,7 @@ const NewBundleCard = ({
           : statusCritical}
       </span>
       {countdown !== 0 && countdown && packageData.title === "Dragon Ruins" && (
-        <div className="col-12">
+        <div className="col-12 mt-3">
           <div className="nft-outer-wrapper new-bundle-wrapper p-3 p-lg-5">
             <div className="d-flex w-100 flex-column flex-lg-row gap-4 gap-lg-0 align-items-center justify-content-between">
               <div className="d-flex flex-column gap-3 available-time-wrapper">
@@ -1277,7 +1277,7 @@ const NewBundleCard = ({
           </div>
         )}
       {packageData.title === "Golden Pass" && (
-        <div className="col-12">
+        <div className="col-12 mt-3">
           <div className="nft-outer-wrapper new-bundle-wrapper p-3 p-lg-5">
             <div className="d-flex w-100 flex-column flex-lg-row gap-4 align-items-center justify-content-between">
               <div className="d-flex flex-column gap-3  available-time-wrapper">
