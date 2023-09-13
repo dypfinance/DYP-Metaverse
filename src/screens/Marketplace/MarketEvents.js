@@ -83,7 +83,7 @@ const MarketEvents = ({
   const { eventId } = useParams();
   const [dummyEvent, setDummyEvent] = useState();
   const [eventPopup, setEventPopup] = useState(false);
-  const selected = useRef(null)
+  const selected = useRef(null);
 
   const dummyBetaPassData = [
     {
@@ -423,18 +423,13 @@ const MarketEvents = ({
     } else if (eventId === "betapass") {
       setSelectedPackage("betaPass");
     }
-
-  
-
   }, []);
 
-
   useEffect(() => {
-    if(windowSize.width < 786) {
-      window.scrollTo(0, 750)
+    if (windowSize.width < 786) {
+      window.scrollTo(0, 750);
     }
-  }, [selectedPackage])
-  
+  }, [selectedPackage]);
 
   const html = document.querySelector("html");
   const bgmenu = document.querySelector("#bgmenu");
@@ -725,93 +720,95 @@ const MarketEvents = ({
                 onClick={() => setEventPopup(false)}
               />
             </div>
-            <div className="profile-event-popup-wrapper p-2 p-lg-3 d-flex flex-column flex-lg-row align-items-start align-items-lg-center justify-content-between mb-3">
-              <div className="d-flex gap-2">
-                <img
-                  src={
-                    dummyEvent?.chain === "Avalanche"
-                      ? eventPopupImageAvax
-                      : dummyEvent?.linkState === "coingecko"
-                      ? eventPopupImageGecko
-                      : dummyEvent.linkState === "gate"
-                      ? gatePopupImage
-                      : eventPopupImage
-                  }
-                  alt=""
-                  style={{ width: 80, height: 80 }}
-                />
-                <div className="d-flex flex-column justify-content-between">
+            <div className="profile-event-popup-wrapper mb-3 p-2 p-lg-3 h-auto">
+              <div className="d-flex flex-column flex-lg-row align-items-start align-items-lg-center justify-content-between">
+                <div className="d-flex gap-2">
+                  <img
+                    src={
+                      dummyEvent?.chain === "Avalanche"
+                        ? eventPopupImageAvax
+                        : dummyEvent?.linkState === "coingecko"
+                        ? eventPopupImageGecko
+                        : dummyEvent.linkState === "gate"
+                        ? gatePopupImage
+                        : eventPopupImage
+                    }
+                    alt=""
+                    style={{ width: 80, height: 80 }}
+                  />
+                  <div className="d-flex flex-column justify-content-between">
+                    <div className="d-flex flex-column">
+                      <h6 className="popup-second-title m-0">
+                        {dummyEvent?.title}
+                      </h6>
+                      <span className="popup-rewards">
+                        $3,000 in {dummyEvent?.rewards} rewards
+                      </span>
+                    </div>
+                    <div className="d-flex">
+                      <span className="event-popup-chain mb-0">
+                        Gameplay: {dummyEvent?.eventType}
+                      </span>
+                    </div>
+                    <div className="d-flex">
+                      <span className="event-popup-chain mb-0">
+                        Chain: {dummyEvent?.chain}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                {dummyEvent?.status === "Live" && (
+                  <div className="d-flex align-items-start popup-timer mt-4 mt-lg-0 gap-1">
+                    <div className="d-flex flex-column align-items-center gap-3">
+                      <h6 className="profile-time-number-2 mb-0">14</h6>
+                      <span className="profile-time-desc-2 mb-0">Days</span>
+                    </div>
+                    <h6 className="profile-time-number-2 mb-0">:</h6>
+                    <div className="d-flex flex-column align-items-center gap-3">
+                      <h6 className="profile-time-number-2 mb-0">23</h6>
+                      <span className="profile-time-desc-2 mb-0">Hours</span>
+                    </div>
+                    <h6 className="profile-time-number-2 mb-0">:</h6>
+                    <div className="d-flex flex-column align-items-center gap-3">
+                      <h6 className="profile-time-number-2 mb-0">46</h6>
+                      <span className="profile-time-desc-2 mb-0">Minutes</span>
+                    </div>
+                  </div>
+                )}
+                {dummyEvent?.status === "Live" ? (
+                  <div className="d-flex align-items-start gap-1">
+                    <div className="d-flex flex-column align-items-center gap-3">
+                      <h6 className="profile-time-number-2 mb-0">14</h6>
+                      <span className="profile-time-desc-2 mb-0">Days</span>
+                    </div>
+                    <h6 className="profile-time-number-2 mb-0">:</h6>
+                    <div className="d-flex flex-column align-items-center gap-3">
+                      <h6 className="profile-time-number-2 mb-0">23</h6>
+                      <span className="profile-time-desc-2 mb-0">Hours</span>
+                    </div>
+                    <h6 className="profile-time-number-2 mb-0">:</h6>
+                    <div className="d-flex flex-column align-items-center gap-3">
+                      <h6 className="profile-time-number-2 mb-0">46</h6>
+                      <span className="profile-time-desc-2 mb-0">Minutes</span>
+                    </div>
+                  </div>
+                ) : (
                   <div className="d-flex flex-column">
-                    <h6 className="popup-second-title m-0">
-                      {dummyEvent?.title}
-                    </h6>
-                    <span className="popup-rewards">
-                      $3,000 in {dummyEvent?.rewards} rewards
-                    </span>
+                    <span className="live-on">Live on</span>
+                    <div className="d-flex align-items-center gap-2">
+                      <img
+                        src={
+                          require("../Account/src/Components/WalletBalance/assets/greenCalendar.svg")
+                            .default
+                        }
+                        className="green-calendar"
+                        alt=""
+                      />
+                      <h6 className="live-on-date mb-0">Sept 25, 2023</h6>
+                    </div>
                   </div>
-                  <div className="d-flex">
-                    <span className="event-popup-chain mb-0">
-                      Gameplay: {dummyEvent?.eventType}
-                    </span>
-                  </div>
-                  <div className="d-flex">
-                    <span className="event-popup-chain mb-0">
-                      Chain: {dummyEvent?.chain}
-                    </span>
-                  </div>
-                </div>
+                )}
               </div>
-              {dummyEvent?.status === "Live" && (
-                <div className="d-flex align-items-start popup-timer mt-4 mt-lg-0 gap-1">
-                  <div className="d-flex flex-column align-items-center gap-3">
-                    <h6 className="profile-time-number-2 mb-0">14</h6>
-                    <span className="profile-time-desc-2 mb-0">Days</span>
-                  </div>
-                  <h6 className="profile-time-number-2 mb-0">:</h6>
-                  <div className="d-flex flex-column align-items-center gap-3">
-                    <h6 className="profile-time-number-2 mb-0">23</h6>
-                    <span className="profile-time-desc-2 mb-0">Hours</span>
-                  </div>
-                  <h6 className="profile-time-number-2 mb-0">:</h6>
-                  <div className="d-flex flex-column align-items-center gap-3">
-                    <h6 className="profile-time-number-2 mb-0">46</h6>
-                    <span className="profile-time-desc-2 mb-0">Minutes</span>
-                  </div>
-                </div>
-              )}
-              {dummyEvent?.status === "Live" ? (
-                <div className="d-flex align-items-start gap-1">
-                  <div className="d-flex flex-column align-items-center gap-3">
-                    <h6 className="profile-time-number-2 mb-0">14</h6>
-                    <span className="profile-time-desc-2 mb-0">Days</span>
-                  </div>
-                  <h6 className="profile-time-number-2 mb-0">:</h6>
-                  <div className="d-flex flex-column align-items-center gap-3">
-                    <h6 className="profile-time-number-2 mb-0">23</h6>
-                    <span className="profile-time-desc-2 mb-0">Hours</span>
-                  </div>
-                  <h6 className="profile-time-number-2 mb-0">:</h6>
-                  <div className="d-flex flex-column align-items-center gap-3">
-                    <h6 className="profile-time-number-2 mb-0">46</h6>
-                    <span className="profile-time-desc-2 mb-0">Minutes</span>
-                  </div>
-                </div>
-              ) : (
-                <div className="d-flex flex-column">
-                  <span className="live-on">Live on</span>
-                  <div className="d-flex align-items-center gap-2">
-                    <img
-                      src={
-                        require("../Account/src/Components/WalletBalance/assets/greenCalendar.svg")
-                          .default
-                      }
-                      className="green-calendar"
-                      alt=""
-                    />
-                    <h6 className="live-on-date mb-0">Sept 25, 2023</h6>
-                  </div>
-                </div>
-              )}
             </div>
             <div className="d-flex align-items-center justify-content-between mb-3">
               <h6 className="how-it-works mb-0">How it works?</h6>
