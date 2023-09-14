@@ -190,6 +190,15 @@ const Utilities = () => {
                   <img
                     width={40}
                     height={40}
+                    src={require(`./assets/coingecko.svg`).default}
+                    alt=""
+                  />
+                  <span className="utility-desc">CoinGecko</span>
+                </div>
+                <div className="d-flex flex-column align-items-center gap-2">
+                  <img
+                    width={40}
+                    height={40}
                     src={require(`./assets/conflux.png`)}
                     alt=""
                   />
