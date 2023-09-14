@@ -91,6 +91,7 @@ const WalletBalance = ({
   allActiveOffers,
   myNFTSCoingecko,
   myGateNfts,
+  myConfluxNfts,
 }) => {
   const [userRank, setUserRank] = useState("");
   const [genesisRank, setGenesisRank] = useState("");
@@ -427,6 +428,7 @@ const WalletBalance = ({
     let recievedOffers = [];
     let coingeckoNftsArray = [];
     let gateNftsArray = [];
+    let confluxNftsArray = [];
 
     // console.log(allListed, "allListed");
 
@@ -506,6 +508,22 @@ const WalletBalance = ({
               tokenId: i,
               type: "gate",
               chain: 56,
+              isStaked: false,
+              isListed: false,
+            });
+          })
+        );
+      }
+
+      if (myConfluxNfts && myConfluxNfts.length > 0) {
+        await Promise.all(
+          myConfluxNfts.map(async (i) => {
+            confluxNftsArray.push({
+              nftAddress: window.config.nft_conflux_address,
+              buyer: coinbase,
+              tokenId: i,
+              type: "conflux",
+              chain: 1030,
               isStaked: false,
               isListed: false,
             });
@@ -667,9 +685,10 @@ const WalletBalance = ({
       setmyNftsOffer(recievedOffers);
 
       finalCollection = [
-        ...finalTimepieceArray,
         ...coingeckoNftsArray,
+        ...confluxNftsArray,
         ...gateNftsArray,
+        ...finalTimepieceArray,
         ...finalLandArray,
         ...finalCawsArray,
         ...stakeArray,
@@ -2595,6 +2614,9 @@ const WalletBalance = ({
                                   window.config.nft_gate_address
                                 ? "gate"
                                 : nft.nftAddress ===
+                                  window.config.nft_conflux_address
+                                ? "conflux"
+                                : nft.nftAddress ===
                                   window.config.nft_coingecko_address
                                 ? "coingecko"
                                 : "timepiece",
@@ -2637,6 +2659,9 @@ const WalletBalance = ({
                                       window.config.nft_gate_address
                                     ? `https://mint.worldofdypians.com/thumbs50/${nft.tokenId}.png`
                                     : nft.nftAddress ===
+                                      window.config.nft_conflux_address
+                                    ? `https://mint.worldofdypians.com/thumbs50/${nft.tokenId}.png`
+                                    : nft.nftAddress ===
                                       window.config.nft_coingecko_address
                                     ? `https://mint.worldofdypians.com/thumbs50/${nft.tokenId}.png`
                                     : `https://timepiece.worldofdypians.com/thumbs50/${nft.tokenId}.png`
@@ -2658,6 +2683,9 @@ const WalletBalance = ({
                                     : nft.nftAddress ===
                                       window.config.nft_gate_address
                                     ? "Gate Beta Pass"
+                                    : nft.nftAddress ===
+                                      window.config.nft_conflux_address
+                                    ? "Conflux Beta Pass"
                                     : "CAWS Timepiece"}{" "}
                                   #{nft.tokenId}
                                 </h6>
@@ -2785,6 +2813,9 @@ const WalletBalance = ({
                                   window.config.nft_gate_address
                                 ? "gate"
                                 : nft.nftAddress ===
+                                window.config.nft_conflux_address
+                              ? "conflux"
+                                : nft.nftAddress ===
                                   window.config.nft_coingecko_address
                                 ? "coingecko"
                                 : "timepiece",
@@ -2829,6 +2860,9 @@ const WalletBalance = ({
                                       window.config.nft_gate_address
                                     ? `https://mint.worldofdypians.com/thumbs50/${nft.tokenId}.png`
                                     : nft.nftAddress ===
+                                    window.config.nft_conflux_address
+                                  ? `https://mint.worldofdypians.com/thumbs50/${nft.tokenId}.png`
+                                    : nft.nftAddress ===
                                       window.config.nft_coingecko_address
                                     ? `https://mint.worldofdypians.com/thumbs50/${nft.tokenId}.png`
                                     : `https://timepiece.worldofdypians.com/thumbs50/${nft.tokenId}.png`
@@ -2852,6 +2886,9 @@ const WalletBalance = ({
                                     : nft.nftAddress ===
                                       window.config.nft_gate_address
                                     ? "Gate Beta Pass"
+                                    : nft.nftAddress ===
+                                      window.config.nft_conflux_address
+                                    ? "Conflux Beta Pass"
                                     : "CAWS Timepiece"}{" "}
                                   #{nft.tokenId}
                                 </h6>
@@ -3440,10 +3477,7 @@ const WalletBalance = ({
                     <span className="live-on">Live on</span>
                     <div className="d-flex align-items-center gap-2">
                       <img
-                        src={
-                          require("./assets/greenCalendar.svg")
-                            .default
-                        }
+                        src={require("./assets/greenCalendar.svg").default}
                         className="green-calendar"
                         alt=""
                       />

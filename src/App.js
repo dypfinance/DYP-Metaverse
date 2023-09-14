@@ -121,6 +121,8 @@ function App() {
 
   const [MyNFTSCoingecko, setMyNFTSCoingecko] = useState([]);
   const [myGateNfts, setMyGateNfts] = useState([])
+  const [myConfluxNfts, setMyConfluxNfts] = useState([])
+
 
   const [latest20BoughtNFTS, setLatest20BoughtNFTS] = useState([]);
   const [
@@ -408,6 +410,11 @@ function App() {
       getMyNFTS(coinbase, "gate").then((NFTS) => {
         setTotalGateNft(NFTS.length);
         setMyGateNfts(NFTS);
+      });
+
+      getMyNFTS(coinbase, "conflux").then((NFTS) => {
+        setTotalConfluxNft(NFTS.length);
+        setMyConfluxNfts(NFTS);
       });
     }
   };
@@ -1625,6 +1632,8 @@ function App() {
                     myGateNfts={myGateNfts}
                     totalGateNft={totalGateNft}
                     totalConfluxNft={totalConfluxNft}
+                    myConfluxNfts={myConfluxNfts}
+
                     timepieceMetadata={timepieceMetadata}
                     handleSwitchNetwork={handleSwitchNetwork}
                   />
@@ -1659,6 +1668,7 @@ function App() {
                     myGateNfts={myGateNfts}
                     totalGateNft={totalGateNft}
                     totalConfluxNft={totalConfluxNft}
+                    myConfluxNfts={myConfluxNfts}
                     timepieceMetadata={timepieceMetadata}
                     handleSwitchNetwork={handleSwitchNetwork}
                   />
@@ -1693,6 +1703,7 @@ function App() {
                     myGateNfts={myGateNfts}
                     totalGateNft={totalGateNft}
                     totalConfluxNft={totalConfluxNft}
+                    myConfluxNfts={myConfluxNfts}
                     timepieceMetadata={timepieceMetadata}
                     handleSwitchNetwork={handleSwitchNetwork}
                   />
@@ -1720,6 +1731,7 @@ function App() {
                     myGateNfts={myGateNfts}
                     totalGateNft={totalGateNft}
                     totalConfluxNft={totalConfluxNft}
+                    myConfluxNfts={myConfluxNfts}
                     timepieceMetadata={timepieceMetadata}
                     handleConnect={handleShowWalletModal}
                     listedNFTS={listedNFTS}
@@ -1753,6 +1765,7 @@ function App() {
                     myGateNfts={myGateNfts}
                     totalGateNft={totalGateNft}
                     totalConfluxNft={totalConfluxNft}
+                    myConfluxNfts={myConfluxNfts}
                     timepieceMetadata={timepieceMetadata}
                     handleConnect={handleShowWalletModal}
                     listedNFTS={listedNFTS}
@@ -1786,6 +1799,7 @@ function App() {
                     myGateNfts={myGateNfts}
                     totalGateNft={totalGateNft}
                     totalConfluxNft={totalConfluxNft}
+                    myConfluxNfts={myConfluxNfts}
                     timepieceMetadata={timepieceMetadata}
                     handleConnect={handleShowWalletModal}
                     listedNFTS={listedNFTS}
