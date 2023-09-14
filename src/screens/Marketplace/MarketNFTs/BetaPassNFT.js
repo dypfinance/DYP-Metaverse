@@ -213,11 +213,10 @@ const BetaPassNFT = ({
       );
       const symbol = await contract.methods.symbol().call();
       setnftSymbol(symbol);
-    }
-    else if (mintTitle === "conflux") {
+    } else if (mintTitle === "conflux") {
       const contract = new window.confluxWeb3.eth.Contract(
         window.CONFLUX_NFT_ABI,
-       window.config.nft_conflux_address
+        window.config.nft_conflux_address
       );
       const symbol = await contract.methods.symbol().call();
       setnftSymbol(symbol);
@@ -347,7 +346,6 @@ const BetaPassNFT = ({
   useEffect(() => {
     window.scrollTo(0, 0);
     // getAllCawsCollection();
-    getNftSymbol();
     document.title = "Beta Pass";
 
     if (terms) {
@@ -404,6 +402,10 @@ const BetaPassNFT = ({
       signWalletPublicAddress();
     }
   }, [dataNonce]);
+
+  useEffect(() => {
+    getNftSymbol();
+  }, [mintTitle]);
 
   return (
     <>
