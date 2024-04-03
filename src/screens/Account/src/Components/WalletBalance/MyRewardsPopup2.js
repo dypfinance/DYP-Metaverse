@@ -57,6 +57,7 @@ const MyRewardsPopupNew = ({
   dypiusPremiumEarnTokens,
   openedSkaleChests,
   allSkaleChests,
+  kittyDashRecords,
 }) => {
   const label = { inputProps: { "aria-label": "Switch demo" } };
   const [previousRewards, setPreviousRewards] = useState(false);
@@ -111,69 +112,6 @@ const MyRewardsPopupNew = ({
 
     if (cachedUserSocialRewards) {
       setuserSocialRewardsCached(cachedUserSocialRewards);
-    }
-  };
-
-  const getStakesIds = async () => {
-    let stakenft = [];
-
-    if (address) {
-      const contract = new window.infuraWeb3.eth.Contract(
-        window.WOD_CAWS_ABI,
-        window.config.wod_caws_address
-      );
-      const allCawsStakes = await contract.methods
-        .depositsOf(address)
-        .call()
-        .then((result) => {
-          if (result.length > 0) {
-            for (let i = 0; i < result.length; i++)
-              stakenft.push(parseInt(result[i]));
-            return stakenft;
-          }
-        });
-
-      return allCawsStakes;
-    }
-  };
-
-  const getStakesIdsLandPool = async () => {
-    if (address) {
-      let staking_contract = new window.infuraWeb3.eth.Contract(
-        window.LANDSTAKING_ABI,
-        window.config.landnftstake_address
-      );
-      let stakenft = [];
-      let myStakes = await staking_contract.methods
-        .depositsOf(address)
-        .call()
-        .then((result) => {
-          for (let i = 0; i < result.length; i++)
-            stakenft.push(parseInt(result[i]));
-          return stakenft;
-        });
-
-      return myStakes;
-    }
-  };
-
-  const getStakesIdsCawsPool = async () => {
-    if (address) {
-      let staking_contract = new window.infuraWeb3.eth.Contract(
-        window.NFTSTAKING_ABI,
-        window.config.nftstaking_address
-      );
-      let stakenft = [];
-      let myStakes = await staking_contract.methods
-        .depositsOf(address)
-        .call()
-        .then((result) => {
-          for (let i = 0; i < result.length; i++)
-            stakenft.push(parseInt(result[i]));
-          return stakenft;
-        });
-
-      return myStakes;
     }
   };
 
@@ -582,6 +520,12 @@ const MyRewardsPopupNew = ({
     fetchUsersocialRewards();
   }, [userSocialRewards]);
 
+  const scrollToView = (viewId) => {
+    document.getElementById(viewId).scrollIntoView({
+      behavior: "smooth",
+    });
+  };
+
   return (
     <div className="d-grid rewardstable-wrapper gap-2 mt-3 px-1">
       <div className="total-earnings-purple-wrapper p-2">
@@ -716,6 +660,7 @@ const MyRewardsPopupNew = ({
           }  p-2`}
           onClick={() => {
             setrewardCategory("nftStaking");
+            scrollToView(previousRewards ? "pastnftStaking" : "nftStaking");
           }}
         >
           <div className="d-flex flex-column align-items-center justify-content-center gap-2">
@@ -768,6 +713,7 @@ const MyRewardsPopupNew = ({
           }  p-2`}
           onClick={() => {
             setrewardCategory("dailyBonus");
+            scrollToView(previousRewards ? "pastdailyBonus" : "dailyBonus");
           }}
         >
           <div className="d-flex flex-column align-items-center justify-content-center gap-2">
@@ -820,6 +766,7 @@ const MyRewardsPopupNew = ({
           }  p-2`}
           onClick={() => {
             setrewardCategory("leaderboard");
+            scrollToView(previousRewards ? "pastleaderboard" : "leaderboard2");
           }}
         >
           <div className="d-flex flex-column align-items-center justify-content-center gap-2">
@@ -878,6 +825,7 @@ const MyRewardsPopupNew = ({
           }  p-2`}
           onClick={() => {
             setrewardCategory("treasurehunt");
+            scrollToView(previousRewards ? "pasttreasurehunt" : "treasurehunt");
           }}
         >
           <div className="d-flex flex-column align-items-center justify-content-center gap-2">
@@ -939,6 +887,9 @@ const MyRewardsPopupNew = ({
           }  p-2`}
           onClick={() => {
             setrewardCategory("specialRewards");
+            scrollToView(
+              previousRewards ? "pastspecialRewards" : "specialRewards"
+            );
           }}
         >
           <div className="d-flex flex-column align-items-center justify-content-center gap-2">
@@ -975,16 +926,30 @@ const MyRewardsPopupNew = ({
             >
               $
               {previousRewards
-                ? getFormattedNumber(userSocialRewardsCached, 2)
-                : getFormattedNumber(0, 2)}
+                ? getFormattedNumber(pastSpecialRewards, 2)
+                : getFormattedNumber(userSocialRewardsCached, 2)}
             </span>
           </div>
         </div>
       </div>
       {previousRewards ? (
-        <div className="d-flex flex-column gap-2">
-          <span className="item-name-title">NFT Staking</span>
-          <div className="item-name-wrapper p-2">
+        <div className="d-flex flex-column gap-2" id="pastnftStaking">
+          <span
+            className={
+              rewardCategory === "nftStaking"
+                ? "item-name-title-selected"
+                : "item-name-title"
+            }
+          >
+            NFT Staking
+          </span>
+          <div
+            className={
+              rewardCategory === "nftStaking"
+                ? "item-name-wrapper-selected p-2"
+                : "item-name-wrapper p-2"
+            }
+          >
             <div className="d-flex flex-column gap-2">
               <div className="d-flex w-100 justify-content-between gap-2">
                 <span className="item-name-left">CAWS</span>
@@ -1008,9 +973,23 @@ const MyRewardsPopupNew = ({
           </div>
         </div>
       ) : (
-        <div className="d-flex flex-column gap-2">
-          <span className="item-name-title">NFT Staking</span>
-          <div className="item-name-wrapper p-2">
+        <div className="d-flex flex-column gap-2" id="nftStaking">
+          <span
+            className={
+              rewardCategory === "nftStaking"
+                ? "item-name-title-selected"
+                : "item-name-title"
+            }
+          >
+            NFT Staking
+          </span>
+          <div
+            className={
+              rewardCategory === "nftStaking"
+                ? "item-name-wrapper-selected p-2"
+                : "item-name-wrapper p-2"
+            }
+          >
             <div className="d-flex flex-column gap-2">
               <div className="d-flex w-100 justify-content-between gap-2">
                 <span className="item-name-left">CAWS Premium</span>
@@ -1020,9 +999,26 @@ const MyRewardsPopupNew = ({
           </div>
         </div>
       )}
-      <div className="d-flex flex-column gap-2">
-        <span className="item-name-title">Daily Bonus</span>
-        <div className="item-name-wrapper p-2">
+      <div
+        className="d-flex flex-column gap-2"
+        id={previousRewards ? "pastdailyBonus" : "dailyBonus"}
+      >
+        <span
+          className={
+            rewardCategory === "dailyBonus"
+              ? "item-name-title-selected"
+              : "item-name-title"
+          }
+        >
+          Daily Bonus
+        </span>
+        <div
+          className={
+            rewardCategory === "dailyBonus"
+              ? "item-name-wrapper-selected p-2"
+              : "item-name-wrapper p-2"
+          }
+        >
           <div className="d-flex flex-column gap-2">
             <div className="d-flex w-100 justify-content-between gap-2">
               <span className="item-name-left">BNB Chain</span>
@@ -1045,9 +1041,27 @@ const MyRewardsPopupNew = ({
           </div>
         </div>
       </div>
-      <div className="d-flex flex-column gap-2">
-        <span className="item-name-title">Leaderboard</span>
-        <div className="item-name-wrapper p-2">
+
+      <div
+        className="d-flex flex-column gap-2"
+        id={previousRewards ? "pastleaderboard" : "leaderboard2"}
+      >
+        <span
+          className={
+            rewardCategory === "leaderboard"
+              ? "item-name-title-selected"
+              : "item-name-title"
+          }
+        >
+          Leaderboard
+        </span>
+        <div
+          className={
+            rewardCategory === "leaderboard"
+              ? "item-name-wrapper-selected p-2"
+              : "item-name-wrapper p-2"
+          }
+        >
           <div className="d-flex justify-content-between gap-4 align-items-center">
             <div className="d-flex flex-column gap-2 w-50">
               <div className="d-flex w-100 justify-content-between gap-2">
@@ -1080,22 +1094,41 @@ const MyRewardsPopupNew = ({
               </div>
               <div className="d-flex w-100 justify-content-between gap-2">
                 <span className="item-name-left">Kitty Dash</span>
-                <span className="item-name-right">$200</span>
+                <span className="item-name-right">
+                  $
+                  {kittyDashRecords.position > 10
+                    ? getFormattedNumber(0, 2)
+                    : getFormattedNumber(0, 2)}
+                </span>
               </div>
             </div>
           </div>
         </div>
       </div>
       {!previousRewards ? (
-        <div className="d-flex flex-column gap-2">
-          <span className="item-name-title">Treasure Hunt</span>
-          <div className="item-name-wrapper p-2">
+        <div className="d-flex flex-column gap-2" id="treasurehunt">
+          <span
+            className={
+              rewardCategory === "treasurehunt"
+                ? "item-name-title-selected"
+                : "item-name-title"
+            }
+          >
+            Treasure Hunt
+          </span>
+          <div
+            className={
+              rewardCategory === "treasurehunt"
+                ? "item-name-wrapper-selected p-2"
+                : "item-name-wrapper p-2"
+            }
+          >
             <div className="treasure-hunt-item-wrapper-active">
               <div className="d-flex flex-column flex-lg-row flex-md-row align-items-center justify-content-between gap-2">
                 <div className="d-flex gap-2 align-items-center justify-content-between col-lg-3">
                   <span className="d-flex align-items-center gap-2 item-name-left">
                     <img src={cmc} alt="" />
-                    CoinMarketCap
+                    CMC
                   </span>
                   <span className="item-name-right">
                     {" "}
@@ -1112,7 +1145,7 @@ const MyRewardsPopupNew = ({
                 <div className="d-flex gap-2 align-items-center justify-content-between col-lg-3">
                   <span className="d-flex align-items-center gap-2 item-name-left">
                     <img src={dypiusPremium} alt="" />
-                    Dypius Premium
+                    Premium
                   </span>
                   <span className="item-name-right">
                     ${getFormattedNumber(dypiusPremiumEarnUsd, 2)}
@@ -1123,9 +1156,23 @@ const MyRewardsPopupNew = ({
           </div>
         </div>
       ) : (
-        <div className="d-flex flex-column gap-2">
-          <span className="item-name-title">Treasure Hunt</span>
-          <div className="item-name-wrapper p-2">
+        <div className="d-flex flex-column gap-2" id="pasttreasurehunt">
+          <span
+            className={
+              rewardCategory === "treasurehunt"
+                ? "item-name-title-selected"
+                : "item-name-title"
+            }
+          >
+            Treasure Hunt
+          </span>
+          <div
+            className={
+              rewardCategory === "treasurehunt"
+                ? "item-name-wrapper-selected p-2"
+                : "item-name-wrapper p-2"
+            }
+          >
             <div className="treasure-hunt-item-wrapper">
               <div className="d-flex flex-column gap-2">
                 <div className="d-flex gap-2 align-items-center justify-content-between">
@@ -1196,9 +1243,26 @@ const MyRewardsPopupNew = ({
           </div>
         </div>
       )}
-      <div className="d-flex flex-column gap-2">
-        <span className="item-name-title">Special Rewards</span>
-        <div className="item-name-wrapper p-2">
+      <div
+        className="d-flex flex-column gap-2"
+        id={previousRewards ? "pastspecialRewards" : "specialRewards"}
+      >
+        <span
+          className={
+            rewardCategory === "specialRewards"
+              ? "item-name-title-selected"
+              : "item-name-title"
+          }
+        >
+          Special Rewards
+        </span>
+        <div
+          className={
+            rewardCategory === "specialRewards"
+              ? "item-name-wrapper-selected p-2"
+              : "item-name-wrapper p-2"
+          }
+        >
           <div className="d-flex flex-column gap-2">
             <div className="d-flex w-100 justify-content-between gap-2">
               <span className="item-name-left">Social Bonus</span>

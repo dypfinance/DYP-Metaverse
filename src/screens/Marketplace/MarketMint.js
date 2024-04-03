@@ -40,6 +40,9 @@ import { NavLink, useLocation, useParams } from "react-router-dom";
 import coin98Upcoming from "./assets/coin98Upcoming.png";
 import coingeckoUpcoming from "./assets/coingeckoUpcoming.png";
 import baseUpcoming from "./assets/baseUpcoming.png";
+import skaleUpcoming from "./assets/upcomingSkale.webp";
+import babydogeUpcoming from "./assets/upcomingBabyDoge.webp";
+
 import Countdown from "react-countdown";
 import getFormattedNumber from "../Account/src/Utils.js/hooks/get-formatted-number";
 
@@ -185,11 +188,11 @@ const MarketMint = ({
     const baseresult = await baseContract.methods.totalSupply().call();
     setcBaseSold(baseresult);
   };
- 
+
   useEffect(() => {
     if (params.id === "skale") {
       setSelectedMint(baseData);
-      setMintTitle('skale')
+      setMintTitle("skale");
     } else if (params.id === "timepiece") {
       setSelectedMint(timepieceData);
       setMintTitle("timepiece");
@@ -436,7 +439,7 @@ const MarketMint = ({
       }
     }
   }, [nftCount, coinbase, cawsArray.length]);
- 
+
   useEffect(() => {
     if (isConnected) {
       if (chainId !== undefined) {
@@ -538,9 +541,6 @@ const MarketMint = ({
                     } px-3 py-2`}
                     onClick={() => setActiveTab("live")}
                   >
-                    <div className="new-upcoming-tag d-flex align-items-center justify-content-center px-1">
-                      <span className="mb-0">New</span>
-                    </div>
                     Live
                   </h6>
                   <h6
@@ -549,6 +549,9 @@ const MarketMint = ({
                     } px-3 py-2`}
                     onClick={() => setActiveTab("upcoming")}
                   >
+                    <div className="new-upcoming-tag d-flex align-items-center justify-content-center px-1">
+                      <span className="mb-0">New</span>
+                    </div>
                     Upcoming
                   </h6>
                   <h6
@@ -565,7 +568,7 @@ const MarketMint = ({
 
               {activeTab === "live" && (
                 <>
-                  <div className="pb-5 px-0 position-relative">
+                  {/* <div className="pb-5 px-0 position-relative">
                     {activeSlide > 0 && (
                       <div className="prev-arrow-nft" onClick={firstPrev}>
                         <img src={nextArrow} alt="" />
@@ -601,7 +604,7 @@ const MarketMint = ({
                         />
                       ))}
                     </Slider>
-                  </div>
+                  </div> */}
                   {selectedMint && (
                     <>
                       <div className="col-12 col-md-12 col-xxl-3 ps-2 ps-lg-0 staking-height-2">
@@ -1278,14 +1281,45 @@ const MarketMint = ({
                 </>
               )}
               {activeTab === "upcoming" && (
-                <div className="new-stake-info-wrapper flex-column flex-lg-row gap-3 gap-lg-0 p-5 d-flex align-items-center justify-content-center">
-                  <div className="d-flex flex-column align-items-center gap-2">
-                    <h6 className="upcoming-stake">Mints are coming...</h6>
-                    <span className="upcoming-stake-desc">
-                      Check back soon!
-                    </span>
+                // <div className="new-stake-info-wrapper flex-column flex-lg-row gap-3 gap-lg-0 p-5 d-flex align-items-center justify-content-center">
+                //   <div className="d-flex flex-column align-items-center gap-2">
+                //     <h6 className="upcoming-stake">Mints are coming...</h6>
+                //     <span className="upcoming-stake-desc">
+                //       Check back soon!
+                //     </span>
+                //   </div>
+                // </div>
+<div className="d-flex flex-column gap-4">
+                <div className="upcoming-mint-wrapper skale-upcoming-mint-wrapper d-flex flex-column flex-lg-row align-items-center justify-content-between px-0">
+                  <div className="d-flex flex-column gap-2 ps-3 pe-3 pe-lg-0 pt-3 pt-lg-0 pb-3 pb-lg-0">
+                    <h6 className="upcoming-mint-title">SKALE Beta Pass</h6>
+                    <p className="upcoming-mint-desc">
+                    Gain entry to metaverse, and join exclusive SKALE event with special ticket.
+                    </p>
                   </div>
+                  <img
+                    src={skaleUpcoming}
+                    alt=""
+                    className="upcoming-mint-img"
+                  />
                 </div>
+
+                <div className="upcoming-mint-wrapper babydoge-upcoming-mint-wrapper d-flex flex-column flex-lg-row align-items-center justify-content-between px-0">
+                  <div className="d-flex flex-column gap-2 ps-3 pe-3 pe-lg-0 pt-3 pt-lg-0 pb-3 pb-lg-0">
+                    <h6 className="upcoming-mint-title">BabyDoge Beta Pass</h6>
+                    <p className="upcoming-mint-desc">
+                    Gain entry to metaverse, and join exclusive BabyDoge event with special ticket.
+                    </p>
+                  </div>
+                  <img
+                    src={babydogeUpcoming}
+                    alt=""
+                    className="upcoming-mint-img"
+                  />
+                </div>
+                
+                </div>
+
                 // <div className="d-flex flex-column gap-4">
                 //   {/* <div className="upcoming-mint-wrapper d-flex flex-column flex-lg-row align-items-center justify-content-between px-0">
                 //     <div className="d-flex flex-column gap-2 ps-3 pe-3 pe-lg-0 pt-3 pt-lg-0 pb-3 pb-lg-0">
@@ -1332,21 +1366,7 @@ const MarketMint = ({
                 //       className="upcoming-mint-img"
                 //     />
                 //   </div> */}
-                //   {/* <div className="upcoming-mint-wrapper base-upcoming-mint-wrapper d-flex flex-column flex-lg-row align-items-center justify-content-between px-0">
-                //     <div className="d-flex flex-column gap-2 ps-3 pe-3 pe-lg-0 pt-3 pt-lg-0 pb-3 pb-lg-0">
-                //       <h6 className="upcoming-mint-title">Base Beta Pass</h6>
-                //       <p className="upcoming-mint-desc">
-                //         Get access to a special ticket to enter the metaverse
-                //         and participate in an exclusive event hosted on Base
-                //         Network
-                //       </p>
-                //     </div>
-                //     <img
-                //       src={baseUpcoming}
-                //       alt=""
-                //       className="upcoming-mint-img"
-                //     />
-                //   </div> */}
+
                 // </div>
                 // <div className="d-flex flex-column gap-4">
                 //   <div className="upcoming-mint-wrapper-conflux upcoming-mint-wrapper d-flex flex-column flex-lg-row align-items-center justify-content-between px-0">

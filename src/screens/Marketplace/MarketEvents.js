@@ -79,6 +79,8 @@ import upcomingDoge from "./assets/upcomingDoge.webp";
 import upcomingSkale from "./assets/upcomingSkale.webp";
 import upcomingSkaleMobile from "./assets/upcomingSkaleMobile.webp";
 
+import upcomingBabyDoge from "./assets/upcomingBabyDoge.webp";
+import upcomingBabyDogeMobile from "./assets/upomingBabyDogeMobile.webp";
 
 import upcomingDyp from "./assets/upcomingDyp.webp";
 import upcomingCmc from "./assets/upcomingCmc.webp";
@@ -1202,6 +1204,24 @@ const MarketEvents = ({
                     />
                      <img
                       src={upcomingSkaleMobile}
+                      alt=""
+                      className="upcoming-mint-img d-block d-lg-none d-md-none"
+                    />
+                  </div>
+                  <div className="border-0 upcoming-mint-wrapper upcoming-babydoge-event d-flex flex-column flex-lg-row align-items-center justify-content-between px-0">
+                    <div className="d-flex flex-column gap-2 ps-3 pe-3 pe-lg-0 pt-3 pt-lg-0 pb-3 pb-lg-0">
+                      <h6 className="upcoming-mint-title">BabyDoge</h6>
+                      <p className="upcoming-mint-desc">
+                      Join the BabyDoge Treasure Hunt event for a chance to grab a share of the $20,000 BabyDoge reward pool.
+                      </p>
+                    </div>
+                    <img
+                      src={upcomingBabyDoge}
+                      alt=""
+                      className="upcoming-mint-img d-none d-lg-block"
+                    />
+                     <img
+                      src={upcomingBabyDogeMobile}
                       alt=""
                       className="upcoming-mint-img d-block d-lg-none d-md-none"
                     />

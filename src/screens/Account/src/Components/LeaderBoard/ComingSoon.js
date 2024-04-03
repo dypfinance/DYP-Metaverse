@@ -78,6 +78,8 @@ const ComingSoon = ({ optionText, data, username, inactiveBoard }) => {
     },
   ];
 
+  console.log('data',data)
+
   return (
     <div
       className="d-flex flex-column position-relative"

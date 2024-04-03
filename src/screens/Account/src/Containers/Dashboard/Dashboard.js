@@ -204,6 +204,7 @@ function Dashboard({
   const [standardSkaleChests, setStandardSkaleChests] = useState([]);
   const [premiumSkaleChests, setPremiumSkaleChests] = useState([]);
   const [openedSkaleChests, setOpenedSkaleChests] = useState([]);
+  const [kittyDashRecords, setkittyDashRecords] = useState([]);
 
   const [leaderboard, setLeaderboard] = useState(false);
   const [syncStatus, setsyncStatus] = useState("initial");
@@ -705,6 +706,25 @@ function Dashboard({
     setGenesisRank2(testArray[0].statValue);
   };
 
+  const fetchKittyDashAroundPlayer = async (userId, userName) => {
+    const data = {
+      StatisticName: "MobileGameDailyLeaderboard",
+      MaxResultsCount: 6,
+      PlayerId: userId,
+    };
+    const result = await axios.post(
+      `https://axf717szte.execute-api.eu-central-1.amazonaws.com/prod/auth/GetLeaderboardAroundPlayer`,
+      data
+    );
+
+    var testArray = result.data.data.leaderboard.filter(
+      (item) => item.displayName === userName
+    );
+    setkittyDashRecords(testArray);
+    // setGenesisRank(testArray[0].position);
+    // setGenesisRank2(testArray[0].statValue);
+  };
+
   const fetchDailyRecordsAroundPlayer = async (userId, userName) => {
     const data = {
       StatisticName: "DailyLeaderboard",
@@ -1064,7 +1084,7 @@ function Dashboard({
       }
     }
   };
-  
+
   const getOpenedChestPerWallet = async () => {
     if (email) {
       if (isPremium) {
@@ -1079,8 +1099,7 @@ function Dashboard({
         ) {
           setCanBuy(false);
         }
-      } 
-      else if (!isPremium) {
+      } else if (!isPremium) {
         if (claimedChests < 10 || claimedSkaleChests < 10) {
           setCanBuy(true);
         } else if (claimedChests === 10 && claimedSkaleChests === 10) {
@@ -1094,7 +1113,7 @@ function Dashboard({
   };
 
   const getAllChests = async (userEmail) => {
-    const emailData = { emailAddress: userEmail };
+    const emailData = { emailAddress: userEmail, chainId: "bnb" };
 
     const result = await axios.post(
       "https://dyp-chest-test.azurewebsites.net/api/GetRewards?=null",
@@ -2207,6 +2226,10 @@ function Dashboard({
         data.getPlayer.playerId,
         data.getPlayer.displayName
       );
+      fetchKittyDashAroundPlayer(
+        data.getPlayer.playerId,
+        data.getPlayer.displayName
+      );
     }
   }, [data, email, count, goldenPassRemainingTime]);
 
@@ -2409,7 +2432,7 @@ function Dashboard({
                           setallChests([]);
                           setallSkaleChests([]);
                           setOpenedChests([]);
-                          setOpenedSkaleChests([])
+                          setOpenedSkaleChests([]);
                           setclaimedSkaleChests(0);
                           setclaimedSkalePremiumChests(0);
                         }}
@@ -2782,6 +2805,7 @@ function Dashboard({
                             dypiusEarnUsd={dypiusEarnUsd}
                             dypiusPremiumEarnUsd={dypiusPremiumEarnUsd}
                             dypiusPremiumEarnTokens={dypiusPremiumEarnTokens}
+                            kittyDashRecords={kittyDashRecords}
                           />
                         </div>
                       </OutsideClickHandler>
@@ -3616,7 +3640,10 @@ function Dashboard({
                 }}
                 premiumTxHash={premiumTxHash}
                 selectedChainforPremium={selectedChainforPremium}
-                onPremiumClickOther={()=>{setdailyBonusPopup(false); setgetPremiumPopup(true)}}
+                onPremiumClickOther={() => {
+                  setdailyBonusPopup(false);
+                  setgetPremiumPopup(true);
+                }}
               />
               // </OutsideClickHandler>
             )}

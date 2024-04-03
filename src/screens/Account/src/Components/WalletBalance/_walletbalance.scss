@@ -1986,7 +1986,22 @@
   line-height: normal;
 }
 
+.item-name-title-selected {
+  color: #ff9100;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
 .item-name-wrapper {
+  border-radius: 12px;
+  background: #232541;
+  border: 1px solid transparent;
+}
+
+.item-name-wrapper-selected {
+  border: 1px solid #ff9100;
   border-radius: 12px;
   background: #232541;
 }

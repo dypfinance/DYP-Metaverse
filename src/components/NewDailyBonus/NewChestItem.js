@@ -199,35 +199,13 @@ const NewChestItem = ({
     // console.log(daily_bonus_contract);
     if (chainId === 204) {
       if (rewardTypes === "premium" && isPremium) {
-        const web3 = new Web3(window.ethereum);
-        const gasPrice = await web3.eth.getGasPrice();
-        console.log("gasPrice", gasPrice);
-        const currentGwei = web3.utils.fromWei(gasPrice, "gwei");
-        const increasedGwei = parseInt(currentGwei) + 1;
-        console.log("increasedGwei", increasedGwei);
-
-        const transactionParameters = {
-          gasPrice: web3.utils.toWei(increasedGwei.toString(), "gwei"),
-        };
-
-        await daily_bonus_contract.methods
-          .openPremiumChest()
-          .estimateGas({ from: address })
-          .then((gas) => {
-            transactionParameters.gas = web3.utils.toHex(gas);
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-        console.log(transactionParameters);
-
         await daily_bonus_contract.methods
           .openPremiumChest()
           .send({
             from: address,
           })
           .then((data) => {
-            getUserRewardsByChest(email, data.transactionHash, chestIndex - 1);
+            getUserRewardsByChest(email, data.transactionHash, chestIndex - 1,"opbnb");
           })
           .catch((e) => {
             window.alertify.error(e?.message);
@@ -240,37 +218,13 @@ const NewChestItem = ({
             console.error(e);
           });
       } else if (rewardTypes === "standard") {
-        // console.log("standard");
-        const web3 = new Web3(window.ethereum);
-        const gasPrice = await web3.eth.getGasPrice();
-        console.log("gasPrice", gasPrice);
-        const currentGwei = web3.utils.fromWei(gasPrice, "gwei");
-        const increasedGwei = parseInt(currentGwei) + 1;
-        console.log("increasedGwei", increasedGwei);
-
-        const transactionParameters = {
-          gasPrice: web3.utils.toWei(increasedGwei.toString(), "gwei"),
-        };
-
-        await daily_bonus_contract_bnb.methods
-          .openChest()
-          .estimateGas({ from: address })
-          .then((gas) => {
-            transactionParameters.gas = web3.utils.toHex(gas);
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-        console.log(transactionParameters);
-
         await daily_bonus_contract.methods
           .openChest()
           .send({
             from: address,
-            ...transactionParameters,
           })
           .then((data) => {
-            getUserRewardsByChest(email, data.transactionHash, chestIndex - 1);
+            getUserRewardsByChest(email, data.transactionHash, chestIndex - 1,"opbnb");
           })
           .catch((e) => {
             console.error(e);
@@ -511,7 +465,9 @@ const NewChestItem = ({
         <img
           className={` ${
             chain === "bnb" ? "new-chest-item-img" : "new-chest-item-img-skale"
-          } ${loading ? chain === "bnb" ?  "chest-shake" : "chest-pulsate" : ""}`}
+          } ${
+            loading ? (chain === "bnb" ? "chest-shake" : "chest-pulsate") : ""
+          }`}
           src={
             chain === "bnb"
               ? require(`../../screens/Account/src/Components/WalletBalance/chestImages/${
@@ -530,7 +486,9 @@ const NewChestItem = ({
         />
       ) : rewardTypes === "premium" && dummypremiumChests ? (
         <img
-          className={`new-chest-item-img ${loading ? chain === "bnb" ?  "chest-shake" : "chest-pulsate" : ""}`}
+          className={`new-chest-item-img ${
+            loading ? (chain === "bnb" ? "chest-shake" : "chest-pulsate") : ""
+          }`}
           src={
             chain === "bnb"
               ? require(`../../screens/Account/src/Components/WalletBalance/chestImages/premium/${
