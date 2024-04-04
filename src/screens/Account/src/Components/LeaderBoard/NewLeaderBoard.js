@@ -1560,7 +1560,7 @@ const NewLeaderBoard = ({
                                           optionText2 === "skale" &&
                                           "premium-goldenscore"
                                         } col-2 font-montserrat ${
-                                          isPremium
+                                          isPremium && username === item.displayName
                                             ? "goldenscore"
                                             : "golden-score-disabled"
                                         }`}
@@ -1571,7 +1571,7 @@ const NewLeaderBoard = ({
                                           prizeSkale[index],
                                           0
                                         )}
-                                        <img src={ isPremium ? premiumIcon : premiumInactive} alt="" />
+                                        <img src={ (isPremium && username === item.displayName) ? premiumIcon : premiumInactive} alt="" />
                                       </td>
                                     </tr>
                                   );
@@ -1643,7 +1643,7 @@ const NewLeaderBoard = ({
                                           optionText2 === "skale" &&
                                           "premium-goldenscore"
                                         } col-2 font-montserrat ${
-                                          isPremium
+                                          isPremium && username === item.displayName
                                             ? "goldenscore"
                                             : "golden-score-disabled"
                                         }`}
@@ -1654,7 +1654,7 @@ const NewLeaderBoard = ({
                                           prizeSkale[index],
                                           0
                                         )}
-                                      <img src={ isPremium ? premiumIcon : premiumInactive} alt="" />
+                                      <img src={ (isPremium && username === item.displayName) ? premiumIcon : premiumInactive} alt="" />
                                       </td>
                                     </tr>
                                   );
@@ -1734,11 +1734,7 @@ const NewLeaderBoard = ({
                                     )}
                                     <td
                                       className={`playerReward text-center font-montserrat ${
-                                        availableTime !== "0" &&
-                                        availableTime &&
-                                        availableTime >= today1.getTime() &&
-                                        availableTime !== undefined &&
-                                        username === userDataSkale.displayName
+                                        (isPremium && username === userDataSkale.displayName)
                                           ? "goldenscore"
                                           : "playerReward"
                                       } col-2 ${
@@ -1757,20 +1753,16 @@ const NewLeaderBoard = ({
                                     {optionText !== "genesis" && (
                                       <td
                                         className={`playerScore col-2 font-montserrat d-flex align-items-center justify-content-center w-100 gap-2 ${
-                                          availableTime !== "0" &&
-                                          availableTime &&
-                                          availableTime >= today1.getTime() &&
-                                          availableTime !== undefined &&
-                                          username === userDataSkale.displayName
+                                          (isPremium && username === userDataSkale.displayName)
                                             ? "goldenscore"
-                                            : "inactivegold"
+                                            : "golden-score-disabled"
                                         }`}
                                       >
                                         +$0
                                         {optionText2 === "skale" && (
                                           <img
                                             src={
-                                              isPremium
+                                              (isPremium && username === userDataSkale.displayName)
                                                 ? premiumIcon
                                                 : premiumInactive
                                             }
