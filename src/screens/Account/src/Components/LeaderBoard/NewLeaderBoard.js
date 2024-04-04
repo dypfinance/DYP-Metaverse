@@ -63,6 +63,38 @@ const NewLeaderBoard = ({
   email,
   coinbase,
   isPremium,
+  userRank,
+  userRankSkale,
+  userRank2,
+  userRank2Skale,
+  userBnbScore,
+  userSkaleScore,
+  genesisRank,
+  genesisRank2,
+  premiumTxHash,
+  selectedChainforPremium,
+  genesisData,
+  previousGenesisVersion,
+  activePlayer,
+  userData,
+  userDataWeekly,
+  userDataMonthly,
+  userDataSkale,
+  userDataGenesis,
+  dailyrecords,
+  previousVersion,
+  dailyrecordsAroundPlayer,
+  previousWeeklyVersion,
+  weeklyrecords,
+  previousMonthlyVersion,
+  monthlyrecords,
+  activeSkalePlayer,
+  skaleRecords,
+  skalePreviousRecords,
+  previousgenesisData,
+  monthlyplayerData,
+  dailyplayerData,
+weeklyplayerData
 }) => {
   const playerData = [
     {
@@ -406,33 +438,31 @@ const NewLeaderBoard = ({
 
   const [optionText, setOptionText] = useState("daily");
   const [optionText2, setOptionText2] = useState("bnb");
-  const [dailyrecords, setRecords] = useState([]);
-  const [dailyrecordsAroundPlayer, setRecordsAroundPlayer] = useState([]);
+  // const [dailyrecords, setRecords] = useState([]);
+  // const [dailyrecordsAroundPlayer, setRecordsAroundPlayer] = useState([]);
   const [prizes, setPrizes] = useState(dummyPrizes);
-  const [activePlayer, setActivePlayer] = useState(false);
-  const [activeSkalePlayer, setActiveSkalePlayer] = useState(false);
+  // const [activePlayer, setActivePlayer] = useState(false);
+  // const [activeSkalePlayer, setActiveSkalePlayer] = useState(false);
 
-  const [userData, setUserData] = useState({});
-  const [userDataWeekly, setUserDataWeekly] = useState({});
-  const [userDataMonthly, setUserDataMonthly] = useState({});
-  const [userDataSkale, setUserDataSkale] = useState({});
-  const [userDataGenesis, setUserDataGenesis] = useState({});
+  // const [userData, setUserData] = useState({});
+  // const [userDataWeekly, setUserDataWeekly] = useState({});
+  // const [userDataMonthly, setUserDataMonthly] = useState({});
+  // const [userDataSkale, setUserDataSkale] = useState({});
+  // const [userDataGenesis, setUserDataGenesis] = useState({});
   const [inactiveBoard, setInactiveBoard] = useState(false);
-  const [dailyplayerData, setdailyplayerData] = useState([]);
-  const [weeklyplayerData, setweeklyplayerData] = useState([]);
-  const [monthlyplayerData, setmonthlyplayerData] = useState([]);
-  const [skaleRecords, setskaleRecords] = useState([]);
-  const [skalePreviousRecords, setskalePreviousRecords] = useState([]);
-  const [skalepreviousVersion, setskalepreviousVersion] = useState(0);
-
-  const [previousVersion, setpreviousVersion] = useState(0);
-  const [previousWeeklyVersion, setpreviousWeeklyVersion] = useState(0);
-  const [previousMonthlyVersion, setpreviousMonthlyVersion] = useState(0);
-  const [previousGenesisVersion, setpreviousGenesisVersion] = useState(0);
-  const [weeklyrecords, setWeeklyRecords] = useState([]);
-  const [monthlyrecords, setMonthlyRecords] = useState([]);
-  const [genesisData, setgenesisData] = useState([]);
-  const [previousgenesisData, setpreviousgenesisData] = useState([]);
+  // const [dailyplayerData, setdailyplayerData] = useState([]);
+  // const [weeklyplayerData, setweeklyplayerData] = useState([]);
+  // const [monthlyplayerData, setmonthlyplayerData] = useState([]);
+  // const [skaleRecords, setskaleRecords] = useState([]);
+  // const [skalePreviousRecords, setskalePreviousRecords] = useState([]);
+  // const [previousVersion, setpreviousVersion] = useState(0);
+  // const [previousWeeklyVersion, setpreviousWeeklyVersion] = useState(0);
+  // const [previousMonthlyVersion, setpreviousMonthlyVersion] = useState(0);
+  // const [previousGenesisVersion, setpreviousGenesisVersion] = useState(0);
+  // const [weeklyrecords, setWeeklyRecords] = useState([]);
+  // const [monthlyrecords, setMonthlyRecords] = useState([]);
+  // const [genesisData, setgenesisData] = useState([]);
+  // const [previousgenesisData, setpreviousgenesisData] = useState([]);
 
   const [isactive, setisActive] = useState(false);
   const [countdown, setcountdown] = useState();
@@ -453,276 +483,273 @@ const NewLeaderBoard = ({
   const backendApi =
     "https://axf717szte.execute-api.eu-central-1.amazonaws.com/prod";
 
-  const fetchGenesisRecords = async () => {
-    const data2 = {
-      StatisticName: "GenesisLandRewards",
-      StartPosition: 0,
-      MaxResultsCount: 10,
-    };
+  // const fetchGenesisRecords = async () => {
+  //   const data2 = {
+  //     StatisticName: "GenesisLandRewards",
+  //     StartPosition: 0,
+  //     MaxResultsCount: 10,
+  //   };
 
-    const result2 = await axios
-      .post(`${backendApi}/auth/GetLeaderboard`, data2)
-      .catch((err) => {
-        console.log(err);
-      });
-    if (result2) {
-      setpreviousGenesisVersion(result2.data.data.version);
+  //   const result2 = await axios
+  //     .post(`${backendApi}/auth/GetLeaderboard`, data2)
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  //   if (result2) {
+  //     setpreviousGenesisVersion(result2.data.data.version);
 
-      setgenesisData(result2.data.data.leaderboard);
-      fillRecordsGenesis(result2.data.data.leaderboard);
-    }
+  //     setgenesisData(result2.data.data.leaderboard);
+  //     fillRecordsGenesis(result2.data.data.leaderboard);
+  //   }
 
-    fetchMonthlyGenesisRecordsAroundPlayer(result2.data.data.leaderboard);
-  };
+  //   fetchMonthlyGenesisRecordsAroundPlayer(result2.data.data.leaderboard);
+  // };
+  // const fetchDailyRecords = async () => {
+  //   const data = {
+  //     StatisticName: "DailyLeaderboard",
+  //     StartPosition: 0,
+  //     MaxResultsCount: 10,
+  //   };
+  //   const result = await axios.post(`${backendApi}/auth/GetLeaderboard`, data);
+  //   setpreviousVersion(parseInt(result.data.data.version));
+  //   setRecords(result.data.data.leaderboard);
+  //   fillRecords(result.data.data.leaderboard);
+  //   var testArray = result.data.data.leaderboard.filter(
+  //     (item) => item.displayName === username
+  //   );
+  //   if (testArray.length > 0) {
+  //     setActivePlayer(true);
+  //   } else if (testArray.length === 0) {
+  //     setActivePlayer(false);
+  //     fetchDailyRecordsAroundPlayer(result.data.data.leaderboard);
+  //   }
+  // };
 
-  const fetchDailyRecordsAroundPlayer = async (itemData) => {
-    const data = {
-      StatisticName: "DailyLeaderboard",
-      MaxResultsCount: 6,
-      PlayerId: userId,
-    };
-    if (userId) {
-      const result = await axios.post(
-        `${backendApi}/auth/GetLeaderboardAroundPlayer`,
-        data
-      );
-      setRecordsAroundPlayer(result.data.data.leaderboard);
-      var testArray = result.data.data.leaderboard.filter(
-        (item) => item.displayName === username
-      );
+  // const fetchDailyRecordsAroundPlayer = async (itemData) => {
+  //   const data = {
+  //     StatisticName: "DailyLeaderboard",
+  //     MaxResultsCount: 6,
+  //     PlayerId: userId,
+  //   };
+  //   if (userId) {
+  //     const result = await axios.post(
+  //       `${backendApi}/auth/GetLeaderboardAroundPlayer`,
+  //       data
+  //     );
+  //     setRecordsAroundPlayer(result.data.data.leaderboard);
+  //     var testArray = result.data.data.leaderboard.filter(
+  //       (item) => item.displayName === username
+  //     );
 
-      if (itemData.length > 0) {
-        var testArray2 = itemData.filter(
-          (item) => item.displayName === username
-        );
+  //     if (itemData.length > 0) {
+  //       var testArray2 = itemData.filter(
+  //         (item) => item.displayName === username
+  //       );
 
-        if (testArray.length > 0 && testArray2.length > 0) {
-          setActivePlayer(true);
-        }
-        if (testArray.length > 0 && testArray2.length === 0) {
-          setActivePlayer(false);
-          setUserData(...testArray);
-        }
-      }
-      if (testArray.length > 0) {
-        setActivePlayer(false);
-        setUserData(...testArray);
-      }
-    }
-  };
+  //       if (testArray.length > 0 && testArray2.length > 0) {
+  //         setActivePlayer(true);
+  //       }
+  //       if (testArray.length > 0 && testArray2.length === 0) {
+  //         setActivePlayer(false);
+  //         setUserData(...testArray);
+  //       }
+  //     }
+  //     if (testArray.length > 0) {
+  //       setActivePlayer(false);
+  //       setUserData(...testArray);
+  //     }
+  //   }
+  // };
 
-  const fetchDailyRecords = async () => {
-    const data = {
-      StatisticName: "DailyLeaderboard",
-      StartPosition: 0,
-      MaxResultsCount: 10,
-    };
-    const result = await axios.post(`${backendApi}/auth/GetLeaderboard`, data);
-    setpreviousVersion(parseInt(result.data.data.version));
-    setRecords(result.data.data.leaderboard);
-    fillRecords(result.data.data.leaderboard);
-    var testArray = result.data.data.leaderboard.filter(
-      (item) => item.displayName === username
-    );
-    if (testArray.length > 0) {
-      setActivePlayer(true);
-    } else if (testArray.length === 0) {
-      setActivePlayer(false);
-      fetchDailyRecordsAroundPlayer(result.data.data.leaderboard);
-    }
-  };
+  // const fetchWeeklyRecordsAroundPlayer = async (itemData) => {
+  //   const data = {
+  //     StatisticName: "WeeklyLeaderboard",
+  //     MaxResultsCount: 6,
+  //     PlayerId: userId,
+  //   };
+  //   if (userId) {
+  //     const result = await axios.post(
+  //       `${backendApi}/auth/GetLeaderboardAroundPlayer`,
+  //       data
+  //     );
+  //     setRecordsAroundPlayer(result.data.data.leaderboard);
+  //     var testArray = result.data.data.leaderboard.filter(
+  //       (item) => item.displayName === username
+  //     );
 
-  const fetchWeeklyRecordsAroundPlayer = async (itemData) => {
-    const data = {
-      StatisticName: "WeeklyLeaderboard",
-      MaxResultsCount: 6,
-      PlayerId: userId,
-    };
-    if (userId) {
-      const result = await axios.post(
-        `${backendApi}/auth/GetLeaderboardAroundPlayer`,
-        data
-      );
-      setRecordsAroundPlayer(result.data.data.leaderboard);
-      var testArray = result.data.data.leaderboard.filter(
-        (item) => item.displayName === username
-      );
+  //     if (itemData.length > 0) {
+  //       var testArray2 = itemData.filter(
+  //         (item) => item.displayName === username
+  //       );
 
-      if (itemData.length > 0) {
-        var testArray2 = itemData.filter(
-          (item) => item.displayName === username
-        );
+  //       if (testArray.length > 0 && testArray2.length > 0) {
+  //         setActivePlayer(true);
+  //       }
+  //       if (testArray.length > 0 && testArray2.length === 0) {
+  //         setActivePlayer(false);
+  //         setUserDataWeekly(...testArray);
+  //       }
+  //     }
+  //     if (testArray.length > 0) {
+  //       setActivePlayer(false);
+  //       setUserDataWeekly(...testArray);
+  //     }
+  //   }
+  // };
 
-        if (testArray.length > 0 && testArray2.length > 0) {
-          setActivePlayer(true);
-        }
-        if (testArray.length > 0 && testArray2.length === 0) {
-          setActivePlayer(false);
-          setUserDataWeekly(...testArray);
-        }
-      }
-      if (testArray.length > 0) {
-        setActivePlayer(false);
-        setUserDataWeekly(...testArray);
-      }
-    }
-  };
+  // const fetchWeeklyRecords = async () => {
+  //   const data = {
+  //     StatisticName: "WeeklyLeaderboard",
+  //     StartPosition: 0,
+  //     MaxResultsCount: 10,
+  //   };
+  //   const result = await axios.post(`${backendApi}/auth/GetLeaderboard`, data);
+  //   setWeeklyRecords(result.data.data.leaderboard);
+  //   setpreviousWeeklyVersion(result.data.data.version);
+  //   var testArray = result.data.data.leaderboard.filter(
+  //     (item) => item.displayName === username
+  //   );
+  //   fillRecords(result.data.data.leaderboard);
 
-  const fetchWeeklyRecords = async () => {
-    const data = {
-      StatisticName: "WeeklyLeaderboard",
-      StartPosition: 0,
-      MaxResultsCount: 10,
-    };
-    const result = await axios.post(`${backendApi}/auth/GetLeaderboard`, data);
-    setWeeklyRecords(result.data.data.leaderboard);
-    setpreviousWeeklyVersion(result.data.data.version);
-    var testArray = result.data.data.leaderboard.filter(
-      (item) => item.displayName === username
-    );
-    fillRecords(result.data.data.leaderboard);
+  //   if (testArray.length > 0) {
+  //     setActivePlayer(true);
+  //   }
+  //   if (testArray.length === 0) {
+  //     setActivePlayer(false);
+  //     fetchWeeklyRecordsAroundPlayer(result.data.data.leaderboard);
+  //   }
+  // };
 
-    if (testArray.length > 0) {
-      setActivePlayer(true);
-    }
-    if (testArray.length === 0) {
-      setActivePlayer(false);
-      fetchWeeklyRecordsAroundPlayer(result.data.data.leaderboard);
-    }
-  };
+  // const fetchMonthlyRecordsAroundPlayer = async (itemData) => {
+  //   const data = {
+  //     StatisticName: "MonthlyLeaderboard",
+  //     MaxResultsCount: 6,
+  //     PlayerId: userId,
+  //   };
+  //   if (userId) {
+  //     const result = await axios.post(
+  //       `${backendApi}/auth/GetLeaderboardAroundPlayer`,
+  //       data
+  //     );
+  //     setRecordsAroundPlayer(result.data.data.leaderboard);
 
-  const fetchMonthlyRecordsAroundPlayer = async (itemData) => {
-    const data = {
-      StatisticName: "MonthlyLeaderboard",
-      MaxResultsCount: 6,
-      PlayerId: userId,
-    };
-    if (userId) {
-      const result = await axios.post(
-        `${backendApi}/auth/GetLeaderboardAroundPlayer`,
-        data
-      );
-      setRecordsAroundPlayer(result.data.data.leaderboard);
+  //     var testArray = result.data.data.leaderboard.filter(
+  //       (item) => item.displayName === username
+  //     );
 
-      var testArray = result.data.data.leaderboard.filter(
-        (item) => item.displayName === username
-      );
+  //     if (itemData.length > 0) {
+  //       var testArray2 = itemData.filter(
+  //         (item) => item.displayName === username
+  //       );
 
-      if (itemData.length > 0) {
-        var testArray2 = itemData.filter(
-          (item) => item.displayName === username
-        );
+  //       if (testArray.length > 0 && testArray2.length > 0) {
+  //         setActivePlayer(true);
+  //       }
 
-        if (testArray.length > 0 && testArray2.length > 0) {
-          setActivePlayer(true);
-        }
+  //       if (testArray.length > 0 && testArray2.length === 0) {
+  //         setActivePlayer(false);
+  //         setUserDataMonthly(...testArray);
+  //       }
+  //     }
+  //     if (testArray.length > 0) {
+  //       setActivePlayer(false);
+  //       setUserDataMonthly(...testArray);
+  //     }
+  //   }
+  // };
+  // const fetchSkaleRecondsAroundPlayer = async (itemData) => {
+  //   const data = {
+  //     StatisticName: "LeaderboardSkaleWeekly",
+  //     MaxResultsCount: 6,
+  //     PlayerId: userId,
+  //   };
+  //   if (userId) {
+  //     const result = await axios.post(
+  //       `${backendApi}/auth/GetLeaderboardAroundPlayer`,
+  //       data
+  //     );
+  //     setRecordsAroundPlayer(result.data.data.leaderboard);
 
-        if (testArray.length > 0 && testArray2.length === 0) {
-          setActivePlayer(false);
-          setUserDataMonthly(...testArray);
-        }
-      }
-      if (testArray.length > 0) {
-        setActivePlayer(false);
-        setUserDataMonthly(...testArray);
-      }
-    }
-  };
-  const fetchSkaleRecondsAroundPlayer = async (itemData) => {
-    const data = {
-      StatisticName: "LeaderboardSkaleWeekly",
-      MaxResultsCount: 6,
-      PlayerId: userId,
-    };
-    if (userId) {
-      const result = await axios.post(
-        `${backendApi}/auth/GetLeaderboardAroundPlayer`,
-        data
-      );
-      setRecordsAroundPlayer(result.data.data.leaderboard);
+  //     var testArray = result.data.data.leaderboard.filter(
+  //       (item) => item.displayName === username
+  //     );
 
-      var testArray = result.data.data.leaderboard.filter(
-        (item) => item.displayName === username
-      );
+  //     if (itemData.length > 0) {
+  //       var testArray2 = itemData.filter(
+  //         (item) => item.displayName === username
+  //       );
 
+  //       if (testArray.length > 0 && testArray2.length > 0) {
+  //         setActiveSkalePlayer(true);
+  //       } else if (testArray.length > 0 && testArray2.length === 0) {
+  //         setActiveSkalePlayer(false);
+  //         setUserDataSkale(...testArray);
+  //       }
+  //     }
+  //     //  else if (testArray.length > 0) {
+  //     //     setActiveSkalePlayer(false);
+  //     //     setUserDataSkale(...testArray);
+  //     //   }
+  //   }
+  // };
+  // const fetchMonthlyGenesisRecordsAroundPlayer = async (itemData) => {
+  //   const data = {
+  //     StatisticName: "GenesisLandRewards",
+  //     MaxResultsCount: 6,
+  //     PlayerId: userId,
+  //   };
+  //   if (userId) {
+  //     const result = await axios.post(
+  //       `${backendApi}/auth/GetLeaderboardAroundPlayer`,
+  //       data
+  //     );
 
-      if (itemData.length > 0) {
-        var testArray2 = itemData.filter(
-          (item) => item.displayName === username
-        );
-        
-        if (testArray.length > 0 && testArray2.length > 0) {
-          setActiveSkalePlayer(true);
-        } else if (testArray.length > 0 && testArray2.length === 0) {
-          setActiveSkalePlayer(false);
-          setUserDataSkale(...testArray);
-        }
-      }
-       else if (testArray.length > 0) {
-          setActiveSkalePlayer(false);
-          setUserDataSkale(...testArray);
-        }
-      
-    }
-  };
-  const fetchMonthlyGenesisRecordsAroundPlayer = async (itemData) => {
-    const data = {
-      StatisticName: "GenesisLandRewards",
-      MaxResultsCount: 6,
-      PlayerId: userId,
-    };
-    if (userId) {
-      const result = await axios.post(
-        `${backendApi}/auth/GetLeaderboardAroundPlayer`,
-        data
-      );
+  //     var testArray = result.data.data.leaderboard.filter(
+  //       (item) => item.displayName === username
+  //     );
 
-      var testArray = result.data.data.leaderboard.filter(
-        (item) => item.displayName === username
-      );
+  //     if (itemData.length > 0) {
+  //       var testArray2 = itemData.filter(
+  //         (item) => item.displayName === username
+  //       );
 
-      if (itemData.length > 0) {
-        var testArray2 = itemData.filter(
-          (item) => item.displayName === username
-        );
+  //       if (testArray.length > 0 && testArray2.length > 0) {
+  //         setActivePlayer(true);
+  //       } else if (testArray.length > 0 && testArray2.length === 0) {
+  //         setActivePlayer(false);
+  //         setUserDataMonthly(...testArray);
+  //         setUserDataGenesis(...testArray);
+  //       }
+  //     } else if (testArray.length > 0) {
+  //       setActivePlayer(false);
+  //       setUserDataMonthly(...testArray);
+  //       setUserDataGenesis(...testArray);
+  //     }
+  //   }
+  // };
 
-        if (testArray.length > 0 && testArray2.length > 0) {
-          setActivePlayer(true);
-        } else if (testArray.length > 0 && testArray2.length === 0) {
-          setActivePlayer(false);
-          setUserDataMonthly(...testArray);
-          setUserDataGenesis(...testArray);
-        }
-      } else if (testArray.length > 0) {
-        setActivePlayer(false);
-        setUserDataMonthly(...testArray);
-        setUserDataGenesis(...testArray);
-      }
-    }
-  };
+  // const fetchMonthlyRecords = async () => {
+  //   const data = {
+  //     StatisticName: "MonthlyLeaderboard",
+  //     StartPosition: 0,
+  //     MaxResultsCount: 10,
+  //   };
+  //   const result = await axios.post(`${backendApi}/auth/GetLeaderboard`, data);
+  //   setMonthlyRecords(result.data.data.leaderboard);
+  //   setpreviousMonthlyVersion(result.data.data.version);
+  //   var testArray = result.data.data.leaderboard.filter(
+  //     (item) => item.displayName === username
+  //   );
+  //   if (testArray.length > 0) {
+  //     setActivePlayer(true);
+  //   }
+  //   fillRecords(result.data.data.leaderboard);
 
-  const fetchMonthlyRecords = async () => {
-    const data = {
-      StatisticName: "MonthlyLeaderboard",
-      StartPosition: 0,
-      MaxResultsCount: 10,
-    };
-    const result = await axios.post(`${backendApi}/auth/GetLeaderboard`, data);
-    setMonthlyRecords(result.data.data.leaderboard);
-    setpreviousMonthlyVersion(result.data.data.version);
-    var testArray = result.data.data.leaderboard.filter(
-      (item) => item.displayName === username
-    );
-    if (testArray.length > 0) {
-      setActivePlayer(true);
-    }
-    fillRecords(result.data.data.leaderboard);
-
-    if (testArray.length === 0) {
-      setActivePlayer(false);
-      fetchMonthlyRecordsAroundPlayer(result.data.data.leaderboard);
-    }
-  };
+  //   if (testArray.length === 0) {
+  //     setActivePlayer(false);
+  //     fetchMonthlyRecordsAroundPlayer(result.data.data.leaderboard);
+  //   }
+  // };
   const label = { inputProps: { "aria-label": "Switch demo" } };
 
   const handleOption = (item) => {
@@ -742,206 +769,202 @@ const NewLeaderBoard = ({
     }
   };
 
-  const fillRecords = (itemData) => {
-    if (itemData.length === 0) {
-      setRecords(placeholderplayerData);
-    } else if (itemData.length <= 10) {
-      const testArray = itemData;
-      const placeholderArray = placeholderplayerData.slice(itemData.length, 10);
-      const finalData = [...testArray, ...placeholderArray];
-      setRecords(finalData);
-    }
-  };
+  // const fillRecords = (itemData) => {
+  //   if (itemData.length === 0) {
+  //     setRecords(placeholderplayerData);
+  //   } else if (itemData.length <= 10) {
+  //     const testArray = itemData;
+  //     const placeholderArray = placeholderplayerData.slice(itemData.length, 10);
+  //     const finalData = [...testArray, ...placeholderArray];
+  //     setRecords(finalData);
+  //   }
+  // };
 
-  const fillRecordsDaily = (itemData) => {
-    if (itemData.length === 0) {
-      setdailyplayerData(placeholderplayerData);
-    } else if (itemData.length <= 10) {
-      const testArray = itemData;
-      const placeholderArray = placeholderplayerData.slice(itemData.length, 10);
-      const finalData = [...testArray, ...placeholderArray];
-      setdailyplayerData(finalData);
-    }
-  };
+  // const fillRecordsDaily = (itemData) => {
+  //   if (itemData.length === 0) {
+  //     setdailyplayerData(placeholderplayerData);
+  //   } else if (itemData.length <= 10) {
+  //     const testArray = itemData;
+  //     const placeholderArray = placeholderplayerData.slice(itemData.length, 10);
+  //     const finalData = [...testArray, ...placeholderArray];
+  //     setdailyplayerData(finalData);
+  //   }
+  // };
 
-  const fillRecordsGenesis = (itemData) => {
-    if (itemData.length === 0) {
-      setgenesisData(placeholderplayerData);
-    } else if (itemData.length <= 10) {
-      const testArray = itemData;
-      const placeholderArray = placeholderplayerData.slice(itemData.length, 10);
-      const finalData = [...testArray, ...placeholderArray];
-      setgenesisData(finalData);
-    }
-  };
+  // const fillRecordsGenesis = (itemData) => {
+  //   if (itemData.length === 0) {
+  //     setgenesisData(placeholderplayerData);
+  //   } else if (itemData.length <= 10) {
+  //     const testArray = itemData;
+  //     const placeholderArray = placeholderplayerData.slice(itemData.length, 10);
+  //     const finalData = [...testArray, ...placeholderArray];
+  //     setgenesisData(finalData);
+  //   }
+  // };
 
-  const fetchPreviousWinners = async () => {
-    if (previousVersion != 0) {
-      const data = {
-        StatisticName: "DailyLeaderboard",
-        StartPosition: 0,
-        MaxResultsCount: 10,
-        Version: previousVersion - 1,
-      };
-      const result = await axios.post(
-        `${backendApi}/auth/GetLeaderboard?Version=-1`,
-        data
-      );
-      fillRecordsDaily(result.data.data.leaderboard);
-    }
+  // const fetchPreviousWinners = async () => {
+  //   if (previousVersion != 0) {
+  //     const data = {
+  //       StatisticName: "DailyLeaderboard",
+  //       StartPosition: 0,
+  //       MaxResultsCount: 10,
+  //       Version: previousVersion - 1,
+  //     };
+  //     const result = await axios.post(
+  //       `${backendApi}/auth/GetLeaderboard?Version=-1`,
+  //       data
+  //     );
+  //     fillRecordsDaily(result.data.data.leaderboard);
+  //   }
 
-    // setdailyplayerData(result.data.data.leaderboard);
-  };
-  const fillRecordsSkale = (itemData) => {
-    if (itemData.length === 0) {
-      setskaleRecords(placeholderplayerData);
-    } else if (itemData.length < 10) {
-      const testArray = itemData;
-      const placeholderArray = placeholderplayerData.slice(itemData.length, 10);
-      const finalData = [...testArray, ...placeholderArray];
-      setskaleRecords(finalData);
-    }
-  };
+  //   // setdailyplayerData(result.data.data.leaderboard);
+  // };
+  // const fillRecordsSkale = (itemData) => {
+  //   if (itemData.length === 0) {
+  //     setskaleRecords(placeholderplayerData);
+  //   } else if (itemData.length < 10) {
+  //     const testArray = itemData;
+  //     const placeholderArray = placeholderplayerData.slice(itemData.length, 10);
+  //     const finalData = [...testArray, ...placeholderArray];
+  //     setskaleRecords(finalData);
+  //   }
+  // };
 
-  const fillPreviousRecordsSkale = (itemData) => {
-    if (itemData.length === 0) {
-      setskalePreviousRecords(placeholderplayerData);
-    } else if (itemData.length < 10) {
-      const testArray = itemData;
-      const placeholderArray = placeholderplayerData.slice(itemData.length, 10);
-      const finalData = [...testArray, ...placeholderArray];
-      setskalePreviousRecords(finalData);
-    }
-  };
+  // const fillPreviousRecordsSkale = (itemData) => {
+  //   if (itemData.length === 0) {
+  //     setskalePreviousRecords(placeholderplayerData);
+  //   } else if (itemData.length < 10) {
+  //     const testArray = itemData;
+  //     const placeholderArray = placeholderplayerData.slice(itemData.length, 10);
+  //     const finalData = [...testArray, ...placeholderArray];
+  //     setskalePreviousRecords(finalData);
+  //   }
+  // };
 
-  const fetchSkaleRecords = async () => {
-    const data = {
-      StatisticName: "LeaderboardSkaleWeekly",
-      StartPosition: 0,
-      MaxResultsCount: 10,
-    };
-    const result = await axios.post(`${backendApi}/auth/GetLeaderboard`, data);
-    var testArray = result.data.data.leaderboard.filter(
-      (item) => item.displayName === username
-    );
-    setskalepreviousVersion(result.data.data.version);
+  // const fetchSkaleRecords = async () => {
+  //   const data = {
+  //     StatisticName: "LeaderboardSkaleWeekly",
+  //     StartPosition: 0,
+  //     MaxResultsCount: 10,
+  //   };
+  //   const result = await axios.post(`${backendApi}/auth/GetLeaderboard`, data);
+  //   var testArray = result.data.data.leaderboard.filter(
+  //     (item) => item.displayName === username
+  //   );
 
-    setskaleRecords(result.data.data.leaderboard);
-    fillRecordsSkale(result.data.data.leaderboard);
-    fetchSkaleRecondsAroundPlayer(result.data.data.leaderboard);
-  };
+  //   setskaleRecords(result.data.data.leaderboard);
+  //   fillRecordsSkale(result.data.data.leaderboard);
+  //   fetchSkaleRecondsAroundPlayer(result.data.data.leaderboard);
+  // };
 
-  const fetchPreviousSkaleRecords = async () => {
-    if(skalepreviousVersion!=0)
-  {  const data = {
-      StatisticName: "LeaderboardSkaleWeekly",
-      StartPosition: 0,
-      MaxResultsCount: 10,
-      Version: skalepreviousVersion - 1,
-    };
-    const result = await axios.post(`${backendApi}/auth/GetLeaderboard`, data);
-    // setpreviousVersion(parseInt(result.data.data.version));
-    console.log(result.data.data.leaderboard)
-    setskalePreviousRecords(result.data.data.leaderboard);
-    fillPreviousRecordsSkale(result.data.data.leaderboard);}
-  };
+  // const fetchPreviousSkaleRecords = async () => {
+  //   const data = {
+  //     StatisticName: "LeaderboardSkaleMonthly",
+  //     StartPosition: 0,
+  //     MaxResultsCount: 10,
+  //   };
+  //   const result = await axios.post(`${backendApi}/auth/GetLeaderboard`, data);
+  //   // setpreviousVersion(parseInt(result.data.data.version));
+  //   setskalePreviousRecords(result.data.data.leaderboard);
+  //   fillPreviousRecordsSkale(result.data.data.leaderboard);
+  // };
 
-  const fetchGenesisPreviousWinners = async () => {
-    if (previousGenesisVersion != 0) {
-      const data = {
-        StatisticName: "GenesisLandRewards",
-        StartPosition: 0,
-        MaxResultsCount: 10,
-        Version: previousGenesisVersion - 1,
-      };
-      const result = await axios.post(
-        `${backendApi}/auth/GetLeaderboard?Version=-1`,
-        data
-      );
-      fillRecordsGenesis(result.data.data.leaderboard);
+  // const fetchGenesisPreviousWinners = async () => {
+  //   if (previousGenesisVersion != 0) {
+  //     const data = {
+  //       StatisticName: "GenesisLandRewards",
+  //       StartPosition: 0,
+  //       MaxResultsCount: 10,
+  //       Version: previousGenesisVersion - 1,
+  //     };
+  //     const result = await axios.post(
+  //       `${backendApi}/auth/GetLeaderboard?Version=-1`,
+  //       data
+  //     );
+  //     fillRecordsGenesis(result.data.data.leaderboard);
 
-      setpreviousgenesisData(result.data.data.leaderboard);
-    }
-  };
+  //     setpreviousgenesisData(result.data.data.leaderboard);
+  //   }
+  // };
 
-  const fetchPreviousWeeklyWinners = async () => {
-    if (previousWeeklyVersion != 0) {
-      const data = {
-        StatisticName: "WeeklyLeaderboard",
-        StartPosition: 0,
-        MaxResultsCount: 10,
-        Version: previousWeeklyVersion - 1,
-      };
-      const result = await axios.post(
-        `${backendApi}/auth/GetLeaderboard?Version=-1`,
-        data
-      );
+  // const fetchPreviousWeeklyWinners = async () => {
+  //   if (previousWeeklyVersion != 0) {
+  //     const data = {
+  //       StatisticName: "WeeklyLeaderboard",
+  //       StartPosition: 0,
+  //       MaxResultsCount: 10,
+  //       Version: previousWeeklyVersion - 1,
+  //     };
+  //     const result = await axios.post(
+  //       `${backendApi}/auth/GetLeaderboard?Version=-1`,
+  //       data
+  //     );
 
-      setweeklyplayerData(result.data.data.leaderboard);
-    }
-  };
+  //     setweeklyplayerData(result.data.data.leaderboard);
+  //   }
+  // };
 
-  const fetchPreviousMonthlyWinners = async () => {
-    if (previousMonthlyVersion != 0) {
-      const data = {
-        StatisticName: "MonthlyLeaderboard",
-        StartPosition: 0,
-        MaxResultsCount: 10,
-        Version: previousMonthlyVersion - 1,
-      };
-      const result = await axios.post(
-        `${backendApi}/auth/GetLeaderboard?Version=-1`,
-        data
-      );
+  // const fetchPreviousMonthlyWinners = async () => {
+  //   if (previousMonthlyVersion != 0) {
+  //     const data = {
+  //       StatisticName: "MonthlyLeaderboard",
+  //       StartPosition: 0,
+  //       MaxResultsCount: 10,
+  //       Version: previousMonthlyVersion - 1,
+  //     };
+  //     const result = await axios.post(
+  //       `${backendApi}/auth/GetLeaderboard?Version=-1`,
+  //       data
+  //     );
 
-      setmonthlyplayerData(result.data.data.leaderboard);
-    }
-  };
+  //     setmonthlyplayerData(result.data.data.leaderboard);
+  //   }
+  // };
 
-  useEffect(() => {
-    fetchDailyRecords();
-    fetchWeeklyRecords();
-    fetchMonthlyRecords();
-    fetchGenesisRecords();
-    fetchSkaleRecords();
-  }, [username]);
+  // useEffect(() => {
+  //   fetchDailyRecords();
+  //   fetchWeeklyRecords();
+  //   fetchMonthlyRecords();
+  //   fetchGenesisRecords();
+  //   fetchSkaleRecords();
+  // }, [username]);
 
-  useEffect(() => {
-    fetchGenesisPreviousWinners();
-    fetchPreviousWinners();
-    fetchPreviousWeeklyWinners();
-    fetchPreviousMonthlyWinners();
-    fetchPreviousSkaleRecords();
-  }, [
-    previousGenesisVersion,
-    previousMonthlyVersion,
-    previousVersion,
-    previousWeeklyVersion,
-  ]);
+  // useEffect(() => {
+  //   fetchGenesisPreviousWinners();
+  //   fetchPreviousWinners();
+  //   fetchPreviousWeeklyWinners();
+  //   fetchPreviousMonthlyWinners();
+  //   fetchPreviousSkaleRecords();
+  // }, [
+  //   previousGenesisVersion,
+  //   previousMonthlyVersion,
+  //   previousVersion,
+  //   previousWeeklyVersion,
+  // ]);
 
-  useEffect(() => {
-    if (inactiveBoard === true && optionText === "daily") {
-      fetchPreviousWinners();
-    }
-    if (inactiveBoard === true && optionText === "weekly") {
-      fetchPreviousWeeklyWinners();
-    }
-    if (inactiveBoard === true && optionText === "genesis") {
-      fetchGenesisPreviousWinners();
-    }
-    if (inactiveBoard === false && optionText === "genesis") {
-      fetchGenesisRecords();
-    }
-    if (inactiveBoard === true && optionText === "monthly") {
-      fetchPreviousMonthlyWinners();
-    }
-  }, [
-    optionText,
-    inactiveBoard,
-    previousVersion,
-    previousWeeklyVersion,
-    previousMonthlyVersion,
-  ]);
+  // useEffect(() => {
+  //   if (inactiveBoard === true && optionText === "daily") {
+  //     fetchPreviousWinners();
+  //   }
+  //   if (inactiveBoard === true && optionText === "weekly") {
+  //     fetchPreviousWeeklyWinners();
+  //   }
+  //   if (inactiveBoard === true && optionText === "genesis") {
+  //     fetchGenesisPreviousWinners();
+  //   }
+  //   if (inactiveBoard === false && optionText === "genesis") {
+  //     fetchGenesisRecords();
+  //   }
+  //   if (inactiveBoard === true && optionText === "monthly") {
+  //     fetchPreviousMonthlyWinners();
+  //   }
+  // }, [
+  //   optionText,
+  //   inactiveBoard,
+  //   previousVersion,
+  //   previousWeeklyVersion,
+  //   previousMonthlyVersion,
+  // ]);
 
   useEffect(() => {
     handleOption(optionText2);
@@ -1037,7 +1060,7 @@ const NewLeaderBoard = ({
                     } optionText col-3`}
                     onClick={() => {
                       handleOption("bnb");
-                      fetchGenesisRecords();
+                      // fetchGenesisRecords();
                     }}
                     style={{ width: "33%" }}
                   >
@@ -1068,7 +1091,7 @@ const NewLeaderBoard = ({
                     style={{ width: "33%" }}
                     onClick={() => {
                       handleOption("skale");
-                      fetchWeeklyRecords();
+                      // fetchWeeklyRecords();
                     }}
                   >
                     <img
@@ -1115,7 +1138,7 @@ const NewLeaderBoard = ({
                     style={{ width: "33%" }}
                     onClick={() => {
                       handleOption("wod");
-                      fetchGenesisRecords();
+                      // fetchGenesisRecords();
                     }}
                   >
                     <img
@@ -1259,7 +1282,6 @@ const NewLeaderBoard = ({
                                   </tr>
                                 );
                               })}
-
                             {dailyplayerData &&
                               inactiveBoard === true &&
                               dailyplayerData.length > 0 &&
@@ -1337,7 +1359,6 @@ const NewLeaderBoard = ({
                                   </tr>
                                 );
                               })}
-
                             {inactiveBoard === true &&
                               dailyplayerData.length === 0 && (
                                 <CircularProgress
