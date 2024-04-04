@@ -135,6 +135,7 @@ const ProfileCard = ({
   const [rankDropdown, setRankDropdown] = useState(false);
   const [rankPopup, setRankPopup] = useState(false);
   const sliderRef = useRef(null);
+  const [rankTooltip, setRankTooltip] = useState(false)
 
   const userTotalScore = userBnbScore + userSkaleScore;
 
@@ -1454,7 +1455,12 @@ const ProfileCard = ({
                 >
                   Rankings and Rewards
                 </h2>
+                <OutsideClickHandler onOutsideClick={() => setRankTooltip(false)}>
                 <HtmlTooltip
+                   open={rankTooltip}
+                   disableFocusListener
+                   disableHoverListener
+                   disableTouchListener
                   title={
                     <React.Fragment>
                       Rankings and Rewards offer players a way to track their
@@ -1477,8 +1483,9 @@ const ProfileCard = ({
                   }
                 >
                   {" "}
-                  <img src={tooltipIcon} width={25} height={25} alt="" />
+                  <img style={{cursor: "pointer"}} src={tooltipIcon} width={25} height={25} onClick={() => setRankTooltip(true)} alt="" />
                 </HtmlTooltip>
+                </OutsideClickHandler>
               </div>
               <img
                 src={xMark}

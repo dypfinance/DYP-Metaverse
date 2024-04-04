@@ -154,6 +154,9 @@ function App() {
   const [listedNFTS, setListedNFTS] = useState([]);
   const [listedNFTS2, setListedNFTS2] = useState([]);
   const [recentListedNFTS2, setrecentListedNFTS2] = useState([]);
+  const [count33, setCount33] = useState(0);
+  const [count44, setCount44] = useState(1);
+
 
   const [myCAWstakes, setCAWMystakes] = useState([]);
   const [myNFTsCreated, setMyNFTsCreated] = useState([]);
@@ -1385,8 +1388,8 @@ function App() {
   const getListedNfts2 = async () => {
     getListedNFTS(0)
       .then((data) => {
-        // console.log(data);
         setListedNFTS2(data);
+        setCount33(count33+1)
       })
       .catch((e) => {
         console.log(e);
@@ -1394,8 +1397,8 @@ function App() {
 
     getListedNFTS(0, "", "recentListedNFTS")
       .then((data) => {
-        // console.log(data);
         setrecentListedNFTS2(data);
+        setCount33(count44+1)
       })
       .catch((e) => {
         console.log(e);
@@ -2185,10 +2188,10 @@ function App() {
   };
 
   useEffect(() => {
-    if (listedNFTS2.length > 0 && recentListedNFTS2.length > 0) {
+    if (count33 !== 0 && count44 !== 0) {
       getOtherNfts();
     }
-  }, [listedNFTS2, recentListedNFTS2, nftCount]);
+  }, [count33, count44, nftCount]);
 
   useEffect(() => {
     if (latest20BoughtNFTS.length > 0) {
@@ -3016,7 +3019,7 @@ function App() {
         </div>
 
         {!location.pathname.includes("account") &&
-          !location.pathname.includes("auth") && <ChestFlyout />}
+          !location.pathname.includes("auth") && !location.pathname.includes("explorer") && <ChestFlyout />}
         {domainPopup && (
           <DomainModal
             onClose={() => setDomainPopup(false)}

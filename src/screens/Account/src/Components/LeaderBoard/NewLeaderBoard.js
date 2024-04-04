@@ -177,7 +177,7 @@ weeklyplayerData
       displayName: "...",
       reward: "---",
       premium: false,
-      statValue: "50",
+      statValue: "---",
     },
     {
       position: "1",
@@ -327,6 +327,7 @@ weeklyplayerData
 
   // const dailyPrizesGolden = ["10", "8", "5", "5", "5", "5", "5", "5", "5", "5"];
   const dailyPrizesGolden = ["10", "8", "5", "5", "5", "5", "5", "5", "5", "5"];
+  const prizeSkale = ["25", "15", "10", "8", "5", "5", "5", "5", "5", "5"];
 
   const previous_dailyPrizesGolden = [
     "20",
@@ -1166,7 +1167,7 @@ weeklyplayerData
               style={{ height: optionText === "genesis" ? "345px" : "384px" }}
             >
               {optionText !== "genesis" ? (
-                windowSize.width > 786 ? (
+                windowSize.width > 1100 ? (
                   <div className="d-flex align-items-center justify-content-between">
                     <div
                       className={`leaderboard-item ${
@@ -1571,7 +1572,7 @@ weeklyplayerData
                                       >
                                         $
                                         {getFormattedNumber(
-                                          monthlyPrizes[index],
+                                          prizeSkale[index],
                                           0
                                         )}
                                       </td>
@@ -1580,18 +1581,18 @@ weeklyplayerData
                                           optionText2 === "skale" &&
                                           "premium-goldenscore"
                                         } col-2 font-montserrat ${
-                                          username === item.displayName
+                                          isPremium && username === item.displayName
                                             ? "goldenscore"
-                                            : "goldenscore-inactive2"
+                                            : "golden-score-disabled"
                                         }`}
                                         style={{ width: "100%" }}
                                       >
                                         +$
                                         {getFormattedNumber(
-                                          monthlyPrizesGolden[index],
+                                          prizeSkale[index],
                                           0
                                         )}
-                                        <img src={premiumIcon} alt="" />
+                                        <img src={ (isPremium && username === item.displayName) ? premiumIcon : premiumInactive} alt="" />
                                       </td>
                                     </tr>
                                   );
@@ -1654,7 +1655,7 @@ weeklyplayerData
                                       >
                                         $
                                         {getFormattedNumber(
-                                          monthlyPrizes[index],
+                                          prizeSkale[index],
                                           0
                                         )}
                                       </td>
@@ -1663,18 +1664,18 @@ weeklyplayerData
                                           optionText2 === "skale" &&
                                           "premium-goldenscore"
                                         } col-2 font-montserrat ${
-                                          username === item.displayName
+                                          isPremium && username === item.displayName
                                             ? "goldenscore"
-                                            : "goldenscore-inactive2"
+                                            : "golden-score-disabled"
                                         }`}
                                         style={{ width: "100%" }}
                                       >
                                         +$
                                         {getFormattedNumber(
-                                          monthlyPrizesGolden[index],
+                                          prizeSkale[index],
                                           0
                                         )}
-                                        <img src={premiumIcon} alt="" />
+                                      <img src={ (isPremium && username === item.displayName) ? premiumIcon : premiumInactive} alt="" />
                                       </td>
                                     </tr>
                                   );
@@ -1754,11 +1755,7 @@ weeklyplayerData
                                     )}
                                     <td
                                       className={`playerReward text-center font-montserrat ${
-                                        availableTime !== "0" &&
-                                        availableTime &&
-                                        availableTime >= today1.getTime() &&
-                                        availableTime !== undefined &&
-                                        username === userDataSkale.displayName
+                                        (isPremium && username === userDataSkale.displayName)
                                           ? "goldenscore"
                                           : "playerReward"
                                       } col-2 ${
@@ -1777,20 +1774,16 @@ weeklyplayerData
                                     {optionText !== "genesis" && (
                                       <td
                                         className={`playerScore col-2 font-montserrat d-flex align-items-center justify-content-center w-100 gap-2 ${
-                                          availableTime !== "0" &&
-                                          availableTime &&
-                                          availableTime >= today1.getTime() &&
-                                          availableTime !== undefined &&
-                                          username === userDataSkale.displayName
+                                          (isPremium && username === userDataSkale.displayName)
                                             ? "goldenscore"
-                                            : "inactivegold"
+                                            : "golden-score-disabled"
                                         }`}
                                       >
                                         +$0
                                         {optionText2 === "skale" && (
                                           <img
                                             src={
-                                              isPremium
+                                              (isPremium && username === userDataSkale.displayName)
                                                 ? premiumIcon
                                                 : premiumInactive
                                             }
@@ -2175,11 +2168,9 @@ weeklyplayerData
                                 <th className="playerHeader font-montserrat">
                                   Player
                                 </th>
-                                {optionText !== "genesis" && (
                                   <th className="playerHeader text-center font-montserrat">
-                                    Score
+                                    Reward
                                   </th>
-                                )}
                               </tr>
                               {genesisData &&
                                 genesisData.length > 0 &&
@@ -2298,7 +2289,7 @@ weeklyplayerData
                                         )}
                                       </td>
                                       <td className="playerScore col-2 text-center font-montserrat">
-                                        {getFormattedNumber(item.statValue, 0)}
+                                        ${getFormattedNumber(item.statValue, 0)}
                                       </td>
                                       {/* <td
                             className={`playerReward text-center col-2 font-montserrat ${
@@ -2395,7 +2386,7 @@ weeklyplayerData
                                     </td>
                                     {optionText !== "genesis" && (
                                       <td className="playerScore col-2 text-center font-montserrat">
-                                        {getFormattedNumber(
+                                        ${getFormattedNumber(
                                           userDataGenesis.statValue,
                                           0
                                         )}

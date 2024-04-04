@@ -1537,7 +1537,7 @@ window.config = {
 
   avax_endpoint: "https://api.avax.network/ext/bc/C/rpc",
   conflux_endpoint: "https://evm.confluxrpc.com/",
-  base_endpoint: "https://base.publicnode.com",
+  base_endpoint: "https://mainnet.base.org",
   opbnb_endpoint: "https://opbnb.publicnode.com",
 
   BUSD_address: "0xe9e7cea3dedca5984780bafc599bd69add087d56",

@@ -766,16 +766,21 @@ const LeaderBoard = ({ username, userId, dypBalancebnb, address }) => {
               style={{ width: 350, right: "20%" }}
             >
               <p className="tooltip-content">
-                The Genesis event in the World of Dypians is an exclusive
-                opportunity available only for Genesis Land NFT owners.
-                <br /> - Genesis leaderboard is a monthly competition with
-                various benefits. <br />- To participate, Genesis Land owners
-                must access their land and hit the gem once a day. <br />- By
-                hitting the gem once a day, players have the opportunity to earn
-                points for the daily, weekly, and monthly leaderboards, and they
-                can also receive rewards in USD. With the monthly competition,
-                Genesis Land NFT owners can showcase their skills and compete
-                with other players for exciting prizes.
+                BNB Chain Leaderboard: In World of Dypians, the BNB Chain
+                Leaderboard tracks players' activities related to the BNB Chain,
+                such as in-game activities, Daily Bonus, and different events.
+                This leaderboard operates on a daily, weekly, and monthly basis,
+                with rewards distributed monthly based on players' performance.<br /><br />
+                SKALE Leaderboard: In World of Dypians, the SKALE Leaderboard
+                tracks players' activities related to SKALE, such as Daily Bonus
+                and Treasure Hunt. This leaderboard operates on a weekly basis,
+                with rewards distributed weekly based on players' performance.<br /><br />
+                Genesis Leaderboard: In World of Dypians, the Genesis
+                Leaderboard is a monthly competition exclusive to Genesis Land
+                NFT owners. This leaderboard tracks players' activities on their
+                Genesis Land, such as hitting the gem once a day, to earn points
+                for BNB Chain leaderboard. Players have the opportunity to earn
+                rewards in USD based on the amount that the genesis gem gives.
               </p>
             </div>
           </div>
@@ -998,10 +1003,7 @@ const LeaderBoard = ({ username, userId, dypBalancebnb, address }) => {
                         }`}
                       >
                         +$
-                        {getFormattedNumber(
-                          monthlyPrizesGolden[index],
-                          0
-                        )}
+                        {getFormattedNumber(monthlyPrizesGolden[index], 0)}
                       </td>
                     </tr>
                   );

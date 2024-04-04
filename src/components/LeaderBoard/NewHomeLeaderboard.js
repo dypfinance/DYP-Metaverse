@@ -78,7 +78,7 @@ const NewHomeLeaderboard = ({ username, userId, dypBalancebnb, address }) => {
     infinite: true,
     speed: 1000,
     autoplay: true,
-    autoplaySpeed: 5000,
+    autoplaySpeed: 3000,
     slidesToShow: 1,
     slidesToScroll: 1,
     initialSlide: 0,
@@ -293,6 +293,8 @@ const NewHomeLeaderboard = ({ username, userId, dypBalancebnb, address }) => {
 
   const dailyPrizesGolden = ["10", "8", "5", "5", "5", "5", "5", "5", "5", "5"];
 
+  const prizeSkale = ["25", "15", "10", "8", "5", "5", "5", "5", "5", "5"];
+
   const previous_dailyPrizesGolden = [
     "20",
     "10",
@@ -430,6 +432,7 @@ const NewHomeLeaderboard = ({ username, userId, dypBalancebnb, address }) => {
   const [monthlyplayerData, setmonthlyplayerData] = useState([]);
   const [skaleRecords, setskaleRecords] = useState([]);
   const [skalePreviousRecords, setskalePreviousRecords] = useState([]);
+  const [skalepreviousVersion, setskalepreviousVersion] = useState(0);
 
   const [previousVersion, setpreviousVersion] = useState(0);
   const [previousWeeklyVersion, setpreviousWeeklyVersion] = useState(0);
@@ -584,21 +587,26 @@ const NewHomeLeaderboard = ({ username, userId, dypBalancebnb, address }) => {
       MaxResultsCount: 10,
     };
     const result = await axios.post(`${backendApi}/auth/GetLeaderboard`, data);
-    // setpreviousVersion(parseInt(result.data.data.version));
+    setskalepreviousVersion(result.data.data.version);
+
     setskaleRecords(result.data.data.leaderboard);
     fillRecordsSkale(result.data.data.leaderboard);
   };
 
   const fetchPreviousSkaleRecords = async () => {
-    const data = {
-      StatisticName: "LeaderboardSkaleMonthly",
+    if(skalepreviousVersion!=0)
+ {   const data = {
+      StatisticName: "LeaderboardSkaleWeekly",
       StartPosition: 0,
       MaxResultsCount: 10,
+      Version: skalepreviousVersion - 1,
+
     };
     const result = await axios.post(`${backendApi}/auth/GetLeaderboard`, data);
     // setpreviousVersion(parseInt(result.data.data.version));
     setskalePreviousRecords(result.data.data.leaderboard);
     fillPreviousRecordsSkale(result.data.data.leaderboard);
+  }
   };
 
   const fetchPreviousWinners = async () => {
@@ -764,16 +772,21 @@ const NewHomeLeaderboard = ({ username, userId, dypBalancebnb, address }) => {
               style={{ width: 350, right: "20%" }}
             >
               <p className="tooltip-content">
-                The Genesis event in the World of Dypians is an exclusive
-                opportunity available only for Genesis Land NFT owners.
-                <br /> - Genesis leaderboard is a monthly competition with
-                various benefits. <br />- To participate, Genesis Land owners
-                must access their land and hit the gem once a day. <br />- By
-                hitting the gem once a day, players have the opportunity to earn
-                points for the daily, weekly, and monthly leaderboards, and they
-                can also receive rewards in USD. With the monthly competition,
-                Genesis Land NFT owners can showcase their skills and compete
-                with other players for exciting prizes.
+                BNB Chain Leaderboard: In World of Dypians, the BNB Chain
+                Leaderboard tracks players' activities related to the BNB Chain,
+                such as in-game activities, Daily Bonus, and different events.
+                This leaderboard operates on a daily, weekly, and monthly basis,
+                with rewards distributed monthly based on players' performance.<br /><br />
+                SKALE Leaderboard: In World of Dypians, the SKALE Leaderboard
+                tracks players' activities related to SKALE, such as Daily Bonus
+                and Treasure Hunt. This leaderboard operates on a weekly basis,
+                with rewards distributed weekly based on players' performance.<br /><br />
+                Genesis Leaderboard: In World of Dypians, the Genesis
+                Leaderboard is a monthly competition exclusive to Genesis Land
+                NFT owners. This leaderboard tracks players' activities on their
+                Genesis Land, such as hitting the gem once a day, to earn points
+                for BNB Chain leaderboard. Players have the opportunity to earn
+                rewards in USD based on the amount that the genesis gem gives.
               </p>
             </div>
           </div>
@@ -1904,7 +1917,7 @@ const NewHomeLeaderboard = ({ username, userId, dypBalancebnb, address }) => {
                             )}
                           </td>
                           <td className="playerScore col-2 text-center font-montserrat">
-                            {getFormattedNumber(item.statValue, 0)}
+                            ${getFormattedNumber(item.statValue, 0)}
                           </td>
                           {/* <td
                             className={`playerReward text-center col-2 font-montserrat ${
@@ -1972,7 +1985,7 @@ const NewHomeLeaderboard = ({ username, userId, dypBalancebnb, address }) => {
                             )}
                           </td>
                           <td className="playerScore col-2 text-center font-montserrat">
-                            {getFormattedNumber(item.statValue, 0)}
+                            ${getFormattedNumber(item.statValue, 0)}
                           </td>
                           {/* <td
                             className={`playerReward text-center col-2 font-montserrat ${
@@ -2090,7 +2103,7 @@ const NewHomeLeaderboard = ({ username, userId, dypBalancebnb, address }) => {
                                 : "playerReward"
                             }`}
                           >
-                            ${getFormattedNumber(monthlyPrizes[index], 0)}
+                            ${getFormattedNumber(prizeSkale[index], 0)}
                           </td>
                           <td
                             className={`playerReward d-flex align-items-center justify-content-center gap-2 mb-0 ${
@@ -2103,10 +2116,8 @@ const NewHomeLeaderboard = ({ username, userId, dypBalancebnb, address }) => {
                             style={{ width: "100%" }}
                           >
                             +$
-                            {getFormattedNumber(monthlyPrizesGolden[index], 0)}
-                           
-                              <img src={premiumIcon} alt="" />
-                          
+                            {getFormattedNumber(prizeSkale[index], 0)}
+                            <img src={premiumIcon} alt="" />
                           </td>
                         </tr>
                       );
@@ -2164,7 +2175,7 @@ const NewHomeLeaderboard = ({ username, userId, dypBalancebnb, address }) => {
                                 : "playerReward"
                             }`}
                           >
-                            ${getFormattedNumber(monthlyPrizes[index], 0)}
+                            ${getFormattedNumber(prizeSkale[index], 0)}
                           </td>
                           <td
                             className={`playerReward d-flex align-items-center justify-content-center gap-2 mb-0 ${
@@ -2177,10 +2188,8 @@ const NewHomeLeaderboard = ({ username, userId, dypBalancebnb, address }) => {
                             style={{ width: "100%" }}
                           >
                             +$
-                            {getFormattedNumber(monthlyPrizesGolden[index], 0)}
-                           
-                              <img src={premiumIcon} alt="" />
-                          
+                            {getFormattedNumber(prizeSkale[index], 0)}
+                            <img src={premiumIcon} alt="" />
                           </td>
                         </tr>
                       );

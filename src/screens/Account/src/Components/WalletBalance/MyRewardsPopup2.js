@@ -58,6 +58,7 @@ const MyRewardsPopupNew = ({
   openedSkaleChests,
   allSkaleChests,
   kittyDashRecords,
+  userRankRewards,
 }) => {
   const label = { inputProps: { "aria-label": "Switch demo" } };
   const [previousRewards, setPreviousRewards] = useState(false);
@@ -527,37 +528,28 @@ const MyRewardsPopupNew = ({
   };
 
   return (
-    <div className="d-grid rewardstable-wrapper gap-2 mt-3 px-1">
+    <div className="d-grid rewardstable-wrapper2 gap-2 mt-3 px-1">
       <div className="total-earnings-purple-wrapper p-2">
         <div className="d-flex flex-column align-items-center justify-content-center">
           <span className="total-rewards-amount">
             $
             {getFormattedNumber(
-              Number(gemRewards) +
-                Number(dailyplayerData) +
-                Number(weeklyplayerData) +
-                Number(userRank2) +
-                Number(genesisData) +
-                Number(cmcuserEarnUsd) +
-                Number(dypiusPremiumEarnUsd) +
-                Number(userSocialRewardsCached) +
-                Number(treasureRewardMoney) +
-                Number(treasureRewardMoneySkale) +
+              Number(wodRewards) +
+                Number(wodCawsRewards) +
+                Number(cawsRewards) +
+                Number(pasttreasureRewardMoney) +
+                Number(gemRewards) +
                 Number(leaderboardTotalData) +
+                Number(baseRewardsUSD) +
+                Number(coingeckoRewardsUSD) +
+                Number(dypiusRewardsUSD) +
                 Number(gateRewardsUSD) +
                 Number(confluxRewardsUSD) +
-                Number(dypiusRewardsUSD) +
-                Number(pastSpecialRewards) +
-                Number(coingeckoRewardsUSD) +
-                Number(baseRewardsUSD) +
-                Number(cawsRewards) +
-                Number(wodCawsRewards) +
-                Number(pasttreasureRewardMoney) +
-                Number(wodRewards),
+                Number(dogeEarnUSD),
               2
             )}
           </span>
-          <span className="total-rewards-desc">TOTAL EARNINGS</span>
+          <span className="total-rewards-desc">LIFETIME EARNINGS</span>
         </div>
       </div>
       <div className="d-flex flex-column gap-1 w-100">
@@ -1279,7 +1271,7 @@ const MyRewardsPopupNew = ({
                 $
                 {previousRewards
                   ? getFormattedNumber(0, 2)
-                  : getFormattedNumber(0, 2)}
+                  : getFormattedNumber(userRankRewards, 2)}
               </span>
             </div>
           </div>

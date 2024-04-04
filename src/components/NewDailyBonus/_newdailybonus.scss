@@ -41,7 +41,7 @@
   @media screen and (max-width: 991px) {
     width: 100%;
     background-image: url("./assets/dailyBonusBgMobile.png");
-    height: 85%;
+    height: 95%;
   }
 }
 
@@ -191,6 +191,7 @@
   padding-right: 12px !important;
   @media screen and (max-width: 991px) {
     overflow-x: scroll;
+    height: 25%;
   }
 }
 
@@ -292,7 +293,7 @@
   background-size: cover;
   border: 2px solid #ae2e04;
   background-position: center;
-  
+
   .new-claim-chest-btn {
     color: #552400 !important;
     border: 2px solid #ae2e04 !important;
@@ -436,7 +437,7 @@
 
 @media screen and (max-width: 991px) {
   .grid-overall-wrapper {
-    height: 30%;
+    height: 40%;
   }
   .grid-scroll {
     height: 100%;
@@ -677,6 +678,16 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+}
+.db-tooltip-desc {
+  color: #fff;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  @media screen and (max-height: 800px) and (max-width: 786px) {
+    font-size: 10px;
+  }
 }
 
 .win-amount {
@@ -935,61 +946,58 @@
   }
 }
 
-
 @-webkit-keyframes vibrate-1 {
   0% {
     -webkit-transform: translate(0);
-            transform: translate(0);
+    transform: translate(0);
   }
   20% {
     -webkit-transform: translate(-2px, 2px);
-            transform: translate(-2px, 2px);
+    transform: translate(-2px, 2px);
   }
   40% {
     -webkit-transform: translate(-2px, -2px);
-            transform: translate(-2px, -2px);
+    transform: translate(-2px, -2px);
   }
   60% {
     -webkit-transform: translate(2px, 2px);
-            transform: translate(2px, 2px);
+    transform: translate(2px, 2px);
   }
   80% {
     -webkit-transform: translate(2px, -2px);
-            transform: translate(2px, -2px);
+    transform: translate(2px, -2px);
   }
   100% {
     -webkit-transform: translate(0);
-            transform: translate(0);
+    transform: translate(0);
   }
 }
 @keyframes vibrate-1 {
   0% {
     -webkit-transform: translate(0);
-            transform: translate(0);
+    transform: translate(0);
   }
   20% {
     -webkit-transform: translate(-2px, 2px);
-            transform: translate(-2px, 2px);
+    transform: translate(-2px, 2px);
   }
   40% {
     -webkit-transform: translate(-2px, -2px);
-            transform: translate(-2px, -2px);
+    transform: translate(-2px, -2px);
   }
   60% {
     -webkit-transform: translate(2px, 2px);
-            transform: translate(2px, 2px);
+    transform: translate(2px, 2px);
   }
   80% {
     -webkit-transform: translate(2px, -2px);
-            transform: translate(2px, -2px);
+    transform: translate(2px, -2px);
   }
   100% {
     -webkit-transform: translate(0);
-            transform: translate(0);
+    transform: translate(0);
   }
 }
-
-
 
 .chest-shake {
   -webkit-animation: shake-bottom 0.8s cubic-bezier(0.455, 0.03, 0.515, 0.955)
@@ -998,10 +1006,9 @@
     both;
 }
 
-
 .chest-pulsate {
-	-webkit-animation: vibrate-1 0.3s linear infinite both;
-	        animation: vibrate-1 0.3s linear infinite both;
+  -webkit-animation: vibrate-1 0.3s linear infinite both;
+  animation: vibrate-1 0.3s linear infinite both;
 }
 
 .percent-img {
@@ -1033,4 +1040,43 @@
 
 .block-pointers {
   pointer-events: none !important;
+}
+
+@media screen and (max-height: 932px) and (max-width: 786px) {
+  .chains-wrapper{
+    margin-top: 30px !important;
+    height: 20% !important;
+  }
+
+  .grid-overall-wrapper{
+    height: 60% !important;
+  }
+  .message-height-wrapper{
+    margin-top: 20px !important;
+    height: 20% !important;
+  }
+}
+@media screen and (max-height: 850px) and (max-width: 786px) {
+  .chains-wrapper{
+    height: 25% !important;
+  }
+
+  .grid-overall-wrapper{
+    height: 45% !important;
+  }
+  .message-height-wrapper{
+    height: 20% !important;
+  }
+}
+@media screen and (max-height: 740px) and (max-width: 786px) {
+  .chains-wrapper{
+    height: 25% !important;
+  }
+
+  .grid-overall-wrapper{
+    height: 40% !important;
+  }
+  .message-height-wrapper{
+    height: 20% !important;
+  }
 }

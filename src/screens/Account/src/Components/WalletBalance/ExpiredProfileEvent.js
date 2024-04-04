@@ -71,7 +71,7 @@ const ExpiredProfileEvent = ({ onOpenEvent, data, event, userEarnedUsd }) => {
         <div className="d-flex align-items-center gap-1">
           <img src={grayFind} height={15} width={15} alt="" />
           <span className="mb-0 event-bottom-text" style={{ color: "#B8B8E0" }}>
-            Explore & Find
+            {event.title === "Dogecoin" ? "Explore & Mine" : "Explore & Find"}
           </span>
         </div>
         <div className="d-flex align-items-center gap-1">
