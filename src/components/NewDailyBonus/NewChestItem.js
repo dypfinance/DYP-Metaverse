@@ -126,7 +126,7 @@ const NewChestItem = ({
     if (chainText) {
       const result = await axios
         .post(
-          "https://dyp-chest-test.azurewebsites.net/api/CollectChest",
+          "https://worldofdypiansdailybonus.azurewebsites.net/api/CollectChest",
           userData_bnb
         )
         .catch((e) => {

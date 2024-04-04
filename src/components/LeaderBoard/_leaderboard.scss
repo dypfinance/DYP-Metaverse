@@ -22,7 +22,7 @@
   background-color: #242240;
   border-radius: 8px;
   padding: 10px;
-  background-image: url("./assets/grandPrizeBanner.jpg");
+  background-image: url("./assets/grandPrizeBanner.webp");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -208,6 +208,16 @@
   }
 }
 
+.golden-score-disabled {
+  color: #8f8e99 !important;
+font-size: 14px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+letter-spacing: -0.252px;
+}
+
+
 .optionsWrapper2 {
   background: linear-gradient(
     180deg,
@@ -255,6 +265,16 @@
 .goldenscore-inactive2 {
   color: #fff ;
 }
+.golden-score-disabled {
+  color: #8f8e99 !important;
+font-size: 14px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+letter-spacing: -0.252px;
+}
+
+
 .playerName {
   font-style: normal;
   font-weight: 400;

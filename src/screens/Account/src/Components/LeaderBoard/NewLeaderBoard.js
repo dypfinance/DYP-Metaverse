@@ -423,6 +423,8 @@ const NewLeaderBoard = ({
   const [monthlyplayerData, setmonthlyplayerData] = useState([]);
   const [skaleRecords, setskaleRecords] = useState([]);
   const [skalePreviousRecords, setskalePreviousRecords] = useState([]);
+  const [skalepreviousVersion, setskalepreviousVersion] = useState(0);
+
   const [previousVersion, setpreviousVersion] = useState(0);
   const [previousWeeklyVersion, setpreviousWeeklyVersion] = useState(0);
   const [previousMonthlyVersion, setpreviousMonthlyVersion] = useState(0);
@@ -822,6 +824,7 @@ const NewLeaderBoard = ({
     var testArray = result.data.data.leaderboard.filter(
       (item) => item.displayName === username
     );
+    setskalepreviousVersion(result.data.data.version);
 
     setskaleRecords(result.data.data.leaderboard);
     fillRecordsSkale(result.data.data.leaderboard);
@@ -829,15 +832,18 @@ const NewLeaderBoard = ({
   };
 
   const fetchPreviousSkaleRecords = async () => {
-    const data = {
-      StatisticName: "LeaderboardSkaleMonthly",
+    if(skalepreviousVersion!=0)
+  {  const data = {
+      StatisticName: "LeaderboardSkaleWeekly",
       StartPosition: 0,
       MaxResultsCount: 10,
+      Version: skalepreviousVersion - 1,
     };
     const result = await axios.post(`${backendApi}/auth/GetLeaderboard`, data);
     // setpreviousVersion(parseInt(result.data.data.version));
+    console.log(result.data.data.leaderboard)
     setskalePreviousRecords(result.data.data.leaderboard);
-    fillPreviousRecordsSkale(result.data.data.leaderboard);
+    fillPreviousRecordsSkale(result.data.data.leaderboard);}
   };
 
   const fetchGenesisPreviousWinners = async () => {
@@ -1554,9 +1560,9 @@ const NewLeaderBoard = ({
                                           optionText2 === "skale" &&
                                           "premium-goldenscore"
                                         } col-2 font-montserrat ${
-                                          username === item.displayName
+                                          isPremium
                                             ? "goldenscore"
-                                            : "goldenscore-inactive2"
+                                            : "golden-score-disabled"
                                         }`}
                                         style={{ width: "100%" }}
                                       >
@@ -1565,7 +1571,7 @@ const NewLeaderBoard = ({
                                           prizeSkale[index],
                                           0
                                         )}
-                                        <img src={premiumIcon} alt="" />
+                                        <img src={ isPremium ? premiumIcon : premiumInactive} alt="" />
                                       </td>
                                     </tr>
                                   );
@@ -1637,9 +1643,9 @@ const NewLeaderBoard = ({
                                           optionText2 === "skale" &&
                                           "premium-goldenscore"
                                         } col-2 font-montserrat ${
-                                          username === item.displayName
+                                          isPremium
                                             ? "goldenscore"
-                                            : "goldenscore-inactive2"
+                                            : "golden-score-disabled"
                                         }`}
                                         style={{ width: "100%" }}
                                       >
@@ -1648,7 +1654,7 @@ const NewLeaderBoard = ({
                                           prizeSkale[index],
                                           0
                                         )}
-                                        <img src={premiumIcon} alt="" />
+                                      <img src={ isPremium ? premiumIcon : premiumInactive} alt="" />
                                       </td>
                                     </tr>
                                   );
@@ -2149,11 +2155,9 @@ const NewLeaderBoard = ({
                                 <th className="playerHeader font-montserrat">
                                   Player
                                 </th>
-                                {optionText !== "genesis" && (
                                   <th className="playerHeader text-center font-montserrat">
-                                    Score
+                                    Reward
                                   </th>
-                                )}
                               </tr>
                               {genesisData &&
                                 genesisData.length > 0 &&
@@ -2272,7 +2276,7 @@ const NewLeaderBoard = ({
                                         )}
                                       </td>
                                       <td className="playerScore col-2 text-center font-montserrat">
-                                        {getFormattedNumber(item.statValue, 0)}
+                                        ${getFormattedNumber(item.statValue, 0)}
                                       </td>
                                       {/* <td
                             className={`playerReward text-center col-2 font-montserrat ${
@@ -2369,7 +2373,7 @@ const NewLeaderBoard = ({
                                     </td>
                                     {optionText !== "genesis" && (
                                       <td className="playerScore col-2 text-center font-montserrat">
-                                        {getFormattedNumber(
+                                        ${getFormattedNumber(
                                           userDataGenesis.statValue,
                                           0
                                         )}

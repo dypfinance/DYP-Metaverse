@@ -2498,7 +2498,7 @@ const NewWalletBalance = ({
       )}
       {stakePopup && (
         <OutsideClickHandler onOutsideClick={() => setStakePopup(false)}>
-          <div className="popup-wrapper popup-active nft-wrapper-popup p-3">
+          <div className="popup-wrapper popup-active nft-wrapper-popup p-3" style={{width: 'fit-content'}}>
             <div className="d-flex align-items-center justify-content-between w-100 mb-4">
               <h6 className="popup-title-2 mb-0">Stake NFT</h6>
               <img
@@ -2508,7 +2508,7 @@ const NewWalletBalance = ({
                 alt=""
               />
             </div>
-            <div className="new-caws-stake-wrapper d-flex align-items-center w-100 ">
+            <div className="new-caws-stake-wrapper d-flex flex-column flex-lg-row align-items-center mb-3">
               <div className="d-flex flex-column flex-lg-row align-items-start align-items-lg-center justify-content-between h-100 w-100 position-relative">
                 <div className="d-flex flex-column ps-4 pt-4 pt-lg-0 gap-4">
                   <div className="d-flex flex-column gap-2">
@@ -2534,82 +2534,9 @@ const NewWalletBalance = ({
                     <span className="instaketxt">In stake</span>
                   </div>
                 )} */}
-                <div className="col-12 px-0">
-                  <div className="wod-stake-wrapper d-flex align-items-center w-100 p-4 p-lg-5">
-                    <div className="stake-stats-wrapper flex-row flex-lg-column d-flex align-items-center justify-content-center gap-4 gap-lg-2">
-                      <div className="stake-stats-item d-flex flex-column align-items-center justify-content-center">
-                        <h6>25%</h6>
-                        <span>APR</span>
-                      </div>
-                      <div className="stake-stats-item d-flex flex-column align-items-center justify-content-center">
-                        <h6>ETH</h6>
-                        <span>Rewards</span>
-                      </div>
-                      <div className="stake-stats-item d-flex flex-column align-items-center justify-content-center">
-                        <h6>No Lock</h6>
-                        <span>Lock Time</span>
-                      </div>
-                    </div>
-                    <div className="d-flex align-items-start align-items-lg-center justify-content-between h-100 w-100 position-relative">
-                      <div className="d-flex flex-column gap-4">
-                        <div className="d-flex flex-column gap-2">
-                          <h6
-                            className="market-stake-title"
-                            style={{ fontSize: "16px" }}
-                          >
-                            World of Dypians Land
-                          </h6>
-                          <span
-                            className="market-stake-desc"
-                            style={{ fontSize: "11px" }}
-                          >
-                            Stake your Genesis Land NFTs to earn daily ETH
-                            rewards.
-                          </span>
-                        </div>
-                        <div className="d-flex align-items-center gap-3">
-                          <NavLink
-                            to={"/marketplace/stake"}
-                            state={{ modal: "landStakeModal" }}
-                            className="btn pill-btn px-3 py-2"
-                            style={{ fontSize: "12px" }}
-                            // onClick={() => {
-                            //   setlandStakeModal(true);
-                            // }}
-                          >
-                            Deposit
-                          </NavLink>
-                          <NavLink
-                            to={"/marketplace/stake"}
-                            state={{ modal: "landunStakeModal" }}
-                            className="btn rewards-btn px-3 py-2"
-                            style={{ fontSize: "12px" }}
-                            // onClick={() => {
-                            //   setlandunStakeModal(true);
-                            // }}
-                          >
-                            Rewards
-                          </NavLink>
-                        </div>
-                        <div
-                          className="tvl-wrapper"
-                          style={{ width: "150px", height: "134px" }}
-                        >
-                          <h6
-                            className="market-stake-tvl"
-                            style={{ fontSize: "24px" }}
-                          >
-                            ${abbreviateNumber(landtvl)}
-                            {/* $1,500 */}
-                          </h6>
-                        </div>
-                        <div></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                
                 <img
-                  className="new-caws-stake-img"
+                  className="new-caws-stake-img p-0"
                   src={
                     windowSize.width < 786 ? newCawsStakeMobile : newCawsStake
                   }

@@ -2036,12 +2036,23 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
+
+  @media only screen and (max-width: 500px) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
 }
 
 .treasure-hunt-item-wrapper-active {
   display: grid;
   grid-template-columns: auto;
   gap: 20px;
+  @media only screen and (max-width: 500px) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
 }
 
 .reward-category-items-wrapper {
