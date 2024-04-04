@@ -1144,7 +1144,7 @@ const NewLeaderBoard = ({
               style={{ height: optionText === "genesis" ? "345px" : "384px" }}
             >
               {optionText !== "genesis" ? (
-                windowSize.width > 786 ? (
+                windowSize.width > 1100 ? (
                   <div className="d-flex align-items-center justify-content-between">
                     <div
                       className={`leaderboard-item ${
