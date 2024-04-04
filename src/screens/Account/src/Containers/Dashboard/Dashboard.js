@@ -358,7 +358,7 @@ function Dashboard({
   const [previousgenesisData, setpreviousgenesisData] = useState([]);
   const [monthlyplayerData, setmonthlyplayerData] = useState([]);
   const [skalepreviousVersion, setskalepreviousVersion] = useState(0);
-  const [kittyDashRecords, setkittyDashRecords] = useState([])
+  const [kittyDashRecords, setkittyDashRecords] = useState([]);
 
   const dailyrewardpopup = document.querySelector("#dailyrewardpopup");
   const html = document.querySelector("html");
@@ -494,6 +494,7 @@ function Dashboard({
 
       setgenesisData(result2.data.data.leaderboard);
       fillRecordsGenesis(result2.data.data.leaderboard);
+      fetchGenesisAroundPlayer(result2.data.data.leaderboard);
     }
 
     fetchMonthlyGenesisRecordsAroundPlayer(result2.data.data.leaderboard);
@@ -911,18 +912,22 @@ function Dashboard({
   };
 
   const fetchPreviousSkaleRecords = async () => {
-    if(skalepreviousVersion!=0)
-  {  const data = {
-      StatisticName: "LeaderboardSkaleWeekly",
-      StartPosition: 0,
-      MaxResultsCount: 10,
-      Version: skalepreviousVersion - 1,
-    };
-    const result = await axios.post(`${backendApi}/auth/GetLeaderboard`, data);
-    // setpreviousVersion(parseInt(result.data.data.version));
-    console.log(result.data.data.leaderboard)
-    setskalePreviousRecords(result.data.data.leaderboard);
-    fillPreviousRecordsSkale(result.data.data.leaderboard);}
+    if (skalepreviousVersion != 0) {
+      const data = {
+        StatisticName: "LeaderboardSkaleWeekly",
+        StartPosition: 0,
+        MaxResultsCount: 10,
+        Version: skalepreviousVersion - 1,
+      };
+      const result = await axios.post(
+        `${backendApi}/auth/GetLeaderboard`,
+        data
+      );
+      // setpreviousVersion(parseInt(result.data.data.version));
+      console.log(result.data.data.leaderboard);
+      setskalePreviousRecords(result.data.data.leaderboard);
+      fillPreviousRecordsSkale(result.data.data.leaderboard);
+    }
   };
 
   const fetchGenesisPreviousWinners = async () => {
@@ -1218,7 +1223,7 @@ function Dashboard({
     }
   };
 
-  const fetchGenesisAroundPlayer = async (userId, userName) => {
+  const fetchGenesisAroundPlayer = async (itemData) => {
     const data = {
       StatisticName: "GenesisLandRewards",
       MaxResultsCount: 6,
@@ -1229,12 +1234,23 @@ function Dashboard({
       data
     );
 
+
     var testArray = result.data.data.leaderboard.filter(
-      (item) => item.displayName === userName
+      (item) => item.displayName === username
     );
 
-    setGenesisRank(testArray[0].position);
-    setGenesisRank2(testArray[0].statValue);
+    if (itemData.length > 0) {
+      var testArray2 = itemData.filter((item) => item.displayName === username);
+    }
+
+    if (testArray.length > 0 && testArray2.length > 0) {
+    } else if (testArray.length > 0 && testArray2.length === 0) {
+      setGenesisRank(testArray[0].position);
+      setGenesisRank2(testArray[0].statValue);
+      setUserDataGenesis(...testArray);
+    }
+
+   
   };
 
   const fetchTreasureHuntData = async (email, userAddress) => {
@@ -1515,7 +1531,6 @@ function Dashboard({
     }
   };
 
-
   const fetchKittyDashAroundPlayer = async (userId, userName) => {
     const data = {
       StatisticName: "MobileGameDailyLeaderboard",
@@ -1534,7 +1549,6 @@ function Dashboard({
     // setGenesisRank(testArray[0].position);
     // setGenesisRank2(testArray[0].statValue);
   };
-
 
   const getOpenedChestPerWallet = async () => {
     if (email) {
@@ -2659,7 +2673,6 @@ function Dashboard({
         data.getPlayer.playerId,
         data.getPlayer.displayName
       );
-   
     }
   }, [data, email, count, goldenPassRemainingTime]);
 
@@ -2707,11 +2720,7 @@ function Dashboard({
       getmyCawsWodStakes();
       getmyWodStakes();
     }
-  }, [
-    userWallet,
-    data?.getPlayer?.wallet?.publicAddress,
-    coinbase,
-  ]);
+  }, [userWallet, data?.getPlayer?.wallet?.publicAddress, coinbase]);
 
   useEffect(() => {
     getOtherNfts();
