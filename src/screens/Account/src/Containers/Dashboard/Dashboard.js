@@ -357,6 +357,8 @@ function Dashboard({
   const [skalePreviousRecords, setskalePreviousRecords] = useState([]);
   const [previousgenesisData, setpreviousgenesisData] = useState([]);
   const [monthlyplayerData, setmonthlyplayerData] = useState([]);
+  const [skalepreviousVersion, setskalepreviousVersion] = useState(0);
+  const [kittyDashRecords, setkittyDashRecords] = useState([])
 
   const dailyrewardpopup = document.querySelector("#dailyrewardpopup");
   const html = document.querySelector("html");
@@ -608,27 +610,27 @@ function Dashboard({
 
       const userPosition = testArray[0].position;
 
-      if (goldenPassRemainingTime) {
-        setdailyplayerData(
-          testArray[0].statValue !== 0
-            ? userPosition > 10
-              ? 0
-              : userPosition === 10
-              ? dailyPrizes[9] + dailyPrizesGolden[9]
-              : dailyPrizes[userPosition] + dailyPrizesGolden[userPosition]
-            : 0
-        );
-      } else if (!goldenPassRemainingTime) {
-        setdailyplayerData(
-          testArray[0].statValue !== 0
-            ? userPosition > 10
-              ? 0
-              : userPosition === 10
-              ? dailyPrizes[9]
-              : dailyPrizes[userPosition]
-            : 0
-        );
-      }
+      // if (goldenPassRemainingTime) {
+      //   setdailyplayerData(
+      //     testArray[0].statValue !== 0
+      //       ? userPosition > 10
+      //         ? 0
+      //         : userPosition === 10
+      //         ? dailyPrizes[9] + dailyPrizesGolden[9]
+      //         : dailyPrizes[userPosition] + dailyPrizesGolden[userPosition]
+      //       : 0
+      //   );
+      // } else if (!goldenPassRemainingTime) {
+      //   setdailyplayerData(
+      //     testArray[0].statValue !== 0
+      //       ? userPosition > 10
+      //         ? 0
+      //         : userPosition === 10
+      //         ? dailyPrizes[9]
+      //         : dailyPrizes[userPosition]
+      //       : 0
+      //   );
+      // }
     }
   };
 
@@ -690,27 +692,27 @@ function Dashboard({
       }
 
       const userPosition = testArray[0].position;
-      if (goldenPassRemainingTime) {
-        setweeklyplayerData(
-          testArray[0].statValue !== 0
-            ? userPosition > 10
-              ? 0
-              : userPosition === 10
-              ? weeklyPrizes[9] + weeklyPrizesGolden[9]
-              : weeklyPrizes[userPosition] + weeklyPrizesGolden[userPosition]
-            : 0
-        );
-      } else if (!goldenPassRemainingTime) {
-        setweeklyplayerData(
-          testArray[0].statValue !== 0
-            ? userPosition > 10
-              ? 0
-              : userPosition === 10
-              ? weeklyPrizes[9]
-              : weeklyPrizes[userPosition]
-            : 0
-        );
-      }
+      // if (goldenPassRemainingTime) {
+      //   setweeklyplayerData(
+      //     testArray[0].statValue !== 0
+      //       ? userPosition > 10
+      //         ? 0
+      //         : userPosition === 10
+      //         ? weeklyPrizes[9] + weeklyPrizesGolden[9]
+      //         : weeklyPrizes[userPosition] + weeklyPrizesGolden[userPosition]
+      //       : 0
+      //   );
+      // } else if (!goldenPassRemainingTime) {
+      //   setweeklyplayerData(
+      //     testArray[0].statValue !== 0
+      //       ? userPosition > 10
+      //         ? 0
+      //         : userPosition === 10
+      //         ? weeklyPrizes[9]
+      //         : weeklyPrizes[userPosition]
+      //       : 0
+      //   );
+      // }
     }
   };
 
@@ -891,7 +893,6 @@ function Dashboard({
       setskalePreviousRecords(finalData);
     }
   };
-
   const fetchSkaleRecords = async () => {
     const data = {
       StatisticName: "LeaderboardSkaleWeekly",
@@ -902,6 +903,7 @@ function Dashboard({
     var testArray = result.data.data.leaderboard.filter(
       (item) => item.displayName === username
     );
+    setskalepreviousVersion(result.data.data.version);
 
     setskaleRecords(result.data.data.leaderboard);
     fillRecordsSkale(result.data.data.leaderboard);
@@ -909,15 +911,18 @@ function Dashboard({
   };
 
   const fetchPreviousSkaleRecords = async () => {
-    const data = {
-      StatisticName: "LeaderboardSkaleMonthly",
+    if(skalepreviousVersion!=0)
+  {  const data = {
+      StatisticName: "LeaderboardSkaleWeekly",
       StartPosition: 0,
       MaxResultsCount: 10,
+      Version: skalepreviousVersion - 1,
     };
     const result = await axios.post(`${backendApi}/auth/GetLeaderboard`, data);
     // setpreviousVersion(parseInt(result.data.data.version));
+    console.log(result.data.data.leaderboard)
     setskalePreviousRecords(result.data.data.leaderboard);
-    fillPreviousRecordsSkale(result.data.data.leaderboard);
+    fillPreviousRecordsSkale(result.data.data.leaderboard);}
   };
 
   const fetchGenesisPreviousWinners = async () => {
@@ -1509,6 +1514,27 @@ function Dashboard({
       }
     }
   };
+
+
+  const fetchKittyDashAroundPlayer = async (userId, userName) => {
+    const data = {
+      StatisticName: "MobileGameDailyLeaderboard",
+      MaxResultsCount: 6,
+      PlayerId: userId,
+    };
+    const result = await axios.post(
+      `https://axf717szte.execute-api.eu-central-1.amazonaws.com/prod/auth/GetLeaderboardAroundPlayer`,
+      data
+    );
+
+    var testArray = result.data.data.leaderboard.filter(
+      (item) => item.displayName === userName
+    );
+    setkittyDashRecords(testArray);
+    // setGenesisRank(testArray[0].position);
+    // setGenesisRank2(testArray[0].statValue);
+  };
+
 
   const getOpenedChestPerWallet = async () => {
     if (email) {
@@ -2619,38 +2645,23 @@ function Dashboard({
     }
   }, [data, email]);
 
-  // useEffect(() => {
-  //   if (
-  //     data &&
-  //     data.getPlayer &&
-  //     data.getPlayer.displayName &&
-  //     data.getPlayer.playerId &&
-  //     data.getPlayer.wallet &&
-  //     data.getPlayer.wallet.publicAddress &&
-  //     email
-  //   ) {
-  //     fetchMonthlyRecordsAroundPlayer(
-  //       data.getPlayer.playerId,
-  //       data.getPlayer.displayName
-  //     );
-  //     fetchSkaleRecordsAroundPlayer(
-  //       data.getPlayer.playerId,
-  //       data.getPlayer.displayName
-  //     );
-  //     fetchGenesisAroundPlayer(
-  //       data.getPlayer.playerId,
-  //       data.getPlayer.displayName
-  //     );
-  //     fetchWeeklyRecordsAroundPlayer(
-  //       data.getPlayer.playerId,
-  //       data.getPlayer.displayName
-  //     );
-  //     fetchDailyRecordsAroundPlayer(
-  //       data.getPlayer.playerId,
-  //       data.getPlayer.displayName
-  //     );
-  //   }
-  // }, [data, email, count, goldenPassRemainingTime]);
+  useEffect(() => {
+    if (
+      data &&
+      data.getPlayer &&
+      data.getPlayer.displayName &&
+      data.getPlayer.playerId &&
+      data.getPlayer.wallet &&
+      data.getPlayer.wallet.publicAddress &&
+      email
+    ) {
+      fetchKittyDashAroundPlayer(
+        data.getPlayer.playerId,
+        data.getPlayer.displayName
+      );
+   
+    }
+  }, [data, email, count, goldenPassRemainingTime]);
 
   useEffect(() => {
     if (
